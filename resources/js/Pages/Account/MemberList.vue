@@ -8,7 +8,7 @@
                         <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Full Name</th>
                         <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Email</th>
                         <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Member of</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Edit</th>
+                        <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Remove Account</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -17,7 +17,9 @@
                         <td class="text-center">{{ data.name }}</td>
                         <td class="text-center">{{ data.email }}</td>
                         <td class="text-center">{{ data.teamname }}</td>
-                        <td class="text-center"></td>
+                        <td class="text-center">
+                            <button v-on:click="destroy(data.id)" class="bg-red-500 text-white shadow-md rounded px-2 py-1 text-sm">Delete</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -33,7 +35,20 @@ export default {
     },
     props:['member'],
     methods:{
-
+        destroy(id){
+            var y = confirm('remove this account?')
+            if (y == true) {
+                axios.post(route('account.destroy'), {
+                    'user_id' : id,
+                }).then(result => {
+                    if (result.data == 'sukses') {
+                        window.location.href = route('account')
+                    }
+                }).catch(err => {
+                    console.log(err.message)
+                });
+            }
+        }
     }
 }
 </script>

@@ -83,6 +83,13 @@ class ProductController extends Controller
     public function edit($id)
     {
         //
+        $data = Product::find($id);
+        if ($data) {
+            # code...
+            return Inertia::render('Product/Edit', ['productdata' => $data]);
+        }else{
+            abort(404);
+        }
     }
 
     /**
@@ -92,9 +99,25 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        $product = Product::find($request->id)->update([
+            'name' => $request->name,
+            'status' => $request->status,
+            'CreativeMarket' => $request->Creativemarket,
+            'Website' => $request->Website,
+            'Element' => $request->Element,
+            'Canva' => $request->Canva,
+            'Etsy' => $request->Etsy,
+            'DesignBundles' => $request->DesignBundles,
+            'Crella' => $request->Crella,
+            'TemplateMonster' => $request->TemplateMonster,
+            'Dafont' => $request->Dafont,
+            'TheHungryJPEG' => $request->TheHungryJPEG,
+            'FDR' => $request->FDR
+        ]);
+        return $product;
     }
 
     /**
@@ -103,8 +126,8 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy(Request $request){
+        $destroy = Product::destroy($request->id);
+        return $destroy;
     }
 }

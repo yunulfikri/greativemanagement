@@ -9,6 +9,7 @@ use App\Models\TeamUser;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 class AccountController extends Controller
 {
     //
@@ -65,6 +66,17 @@ class AccountController extends Controller
             ]);   
         }
 
+        return 'sukses';
+    }
+    public function destroy(Request $request){
+        User::destroy($request->user_id);
+        return 'sukses';
+    }
+    public function currentteamupdate(Request $request){
+        $id = Auth::id();
+        User::find($id)->update([
+            'current_team_id' => $request->team_id
+        ]);
         return 'sukses';
     }
 }

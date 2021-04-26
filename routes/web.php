@@ -33,14 +33,29 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('/product', 'ProductController@index')->name('product');
     Route::get('/product/add', 'ProductController@create')->name('product.add');
+    Route::get('/product/{id}/edit', 'ProductController@edit')->name('product.edit');
+    Route::post('/product/update', 'ProductController@update')->name('product.update');
     Route::post('/product/store', 'ProductController@store')->name('product.store');
+    Route::post('/product/destroy', 'ProductController@destroy')->name('product.destroy');
     Route::get('/product/search/{q}', 'ProductController@search')->name('product.search');
 
 
     Route::get('/guide', 'GuideController@index')->name('guide');
     Route::get('/guide/add', 'GuideController@create')->name('guide.add');
     Route::post('/guide/store', 'GuideController@store')->name('guide.store');
+    Route::get('/guide/{id}/edit', 'GuideController@edit')->name('guide.edit');
+    Route::post('/guide/update', 'GuideController@update')->name('guide.update');
+    Route::post('/guide/destroy', 'GuideController@destroy')->name('guide.destroy');
+    Route::get('/guide/search/{q}', 'GuideController@search')->name('guide.search');
+
+    Route::get('/brief', 'BriefController@index')->name('brief');
+    Route::get('/brief/add', 'BriefController@create')->name('brief.add');
+    Route::post('/brief/store', 'BriefController@store')->name('brief.store');
+    Route::get('/brief/search/{q}', 'BriefController@search')->name('brief.search');
+    
 
     Route::get('/accounts/settings', 'AccountController@index')->name('account');
     Route::post('/accounts/store', 'AccountController@store')->name('account.store');
+    Route::post('/accounts/destroy', 'AccountController@destroy')->name('account.destroy');
+    Route::put('/account/current-team-switch', 'AccountController@currentteamupdate')->name('account.currentteamupdate');
 });

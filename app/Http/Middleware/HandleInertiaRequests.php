@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use App\Models\Team;
+use App\Models\TeamUser;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -36,8 +38,27 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request)
     {
-        return array_merge(parent::share($request), [
-            //
-        ]);
+        
+        if ($request->user() && $request->user()->role == 'member') {
+            # code...
+            $teamid = $request->user();
+            $teamname = Team::find($teamid->current_team_id);
+            $teamuser = TeamUser::where('user_id',13)
+                        ->join('teams', 'teams.id', '=', 'teams_users.team_id')
+                        ->select('teams.*')
+                        ->get();
+
+            return array_merge(parent::share($request), [
+                //
+                'team.name' => $teamname['name'],
+                'team.data' => $teamuser
+            ]);
+        }else{
+            return array_merge(parent::share($request), [
+                //
+                'team.data' => []
+            ]);
+        }
+        
     }
 }
