@@ -67,7 +67,8 @@
                         </div>
                     </div>
                     <div class="flex">
-                        <button v-on:click="reset" class="bg-red-500 text-white shadow-md rounded-lg w-2/5 py-3 px-5 mx-1 w-4/5text-center text-lg font-bold">Reset</button>
+                        <button v-on:click="reset" class="text-gray-500 shadow-md rounded-lg w-2/5 py-3 px-5 mx-1 w-4/5text-center text-lg font-bold">Reset</button>
+                        <button v-on:click="destroyGuide" class="bg-red-500 text-white shadow-md rounded-lg w-2/5 py-3 px-5 mx-1 w-4/5text-center text-lg font-bold">Delete</button>
                         <button v-on:click="saveBrief()"
                         class="bg-green-500 text-white shadow-md rounded-lg w-3/5 py-3 px-5 mx-1 text-center text-lg font-bold">
                         Save Brief
@@ -87,23 +88,24 @@
         data() {
             return {
                 formBrief: {
-                    name: '',
-                    user_id: null,
-                    ref: '',
-                    list: '',
-                    quantity: '',
-                    status: ''
+                    id: this.dataedit.id,
+                    name: this.dataedit.name,
+                    user_id: this.dataedit.user_id,
+                    ref: this.dataedit.ref,
+                    list: this.dataedit.list,
+                    quantity: this.dataedit.quantity,
+                    status: this.dataedit.status,
                 }
             }
         },
         components: {
             AppLayout,
         },
-        props:['member'],
+        props:['member', 'dataedit'],
         methods: {
             saveBrief() {
                 console.log(this.formBrief)
-                axios.post(route('brief.store'), this.formBrief)
+                axios.post(route('brief.update'), this.formBrief)
                     .then(response => {
                         console.log(response.data)
                         this.reset()
@@ -115,12 +117,12 @@
             },
             reset(){
                 this.formBrief= {
-                    name: '',
-                    user_id: '',
-                    ref: '',
-                    list: '',
-                    quantity: '',
-                    status: ''
+                    name: this.dataedit.name,
+                    user_id: this.dataedit.user_id,
+                    ref: this.dataedit.ref,
+                    list: this.dataedit.list,
+                    quantity: this.dataedit.quantity,
+                    status: this.dataedit.status,
                 }
 
             }

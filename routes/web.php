@@ -48,10 +48,22 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/guide/destroy', 'GuideController@destroy')->name('guide.destroy');
     Route::get('/guide/search/{q}', 'GuideController@search')->name('guide.search');
 
+
     Route::get('/brief', 'BriefController@index')->name('brief');
     Route::get('/brief/add', 'BriefController@create')->name('brief.add');
     Route::post('/brief/store', 'BriefController@store')->name('brief.store');
     Route::get('/brief/search/{q}', 'BriefController@search')->name('brief.search');
+    Route::get('/brief/{id}/edit', 'BriefController@edit')->name('brief.edit');
+    Route::post('/brief/update', 'BriefController@update')->name('brief.update');
+
+
+    Route::get('/task', 'FreepikTaskController@index')->name('task');
+    Route::get('/task/add', 'FreepikTaskController@create')->name('task.add');
+    Route::post('/task/store', 'FreepikTaskController@store')->name('task.store');
+    Route::get('/task/{id}/edit', 'FreepikTaskController@edit')->name('task.edit');
+    Route::post('/task/update', 'FreepikTaskController@update')->name('task.update');
+    Route::post('/task/destroy', 'FreepikTaskController@destroy')->name('task.destroy');
+    Route::get('/task/search/{q}', 'FreepikTaskController@search')->name('task.search');
     
 
     Route::get('/accounts/settings', 'AccountController@index')->name('account');

@@ -8,7 +8,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-3 min-h-screen">
                 <div class="flex justify-between">
-                    <a :href="route('product.add')" class="bg-purple-600 px-4 py-2 text-base tracking-wider text-white inline-flex items-center space-x-2 rounded hover:bg-blue-600 mb-5 mt-2">
+                    <a :href="route('product.add')" class="greative-bg-color px-4 py-2 text-base tracking-wider text-white inline-flex items-center space-x-2 rounded hover:bg-blue-600 mb-5 mt-2">
                         <span>
                             Add New Product
                         </span>

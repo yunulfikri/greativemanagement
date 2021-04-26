@@ -1,16 +1,16 @@
 <template>
     <app-layout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Project Brief</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Freepik</h2>
         </template>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-3 min-h-screen">
                     <div class="flex justify-between">
-                        <a :href="route('brief.add')"
+                        <a :href="route('task.add')"
                             class="px-4 py-2 text-base tracking-wider text-white inline-flex items-center space-x-2 rounded hover:bg-blue-600 mb-5 mt-2 greative-bg-color">
                             <span>
-                                Add New Project Brief
+                                Add New Freepik Task
                             </span>
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current"
@@ -47,25 +47,25 @@
                                             <tr class="bg-gray-500">
                                                 <th class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">No</th>
                                                 <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Project Name</th>
-                                                <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Member</th>
+                                                <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Quantity</th>
                                                 <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Reference</th>
-                                                <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">List</th>
-                                                <th class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Quantity</th>
+                                                <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Deadline</th>
+                                                <th class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Member</th>
                                                 <th class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Status</th>
                                                 <th class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Edit</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="(data, index) in brief" :key="data.id">
+                                            <tr v-for="(data, index) in task" :key="data.id">
                                                 <td class="px-3 py-4 whitespace-nowrap text-center">{{ index+1 }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-center">{{ data.name }}</td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-center capitalize">{{ data.membername }}</td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-center"><a :href="data.ref" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">Click Here</a></td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-center"><a :href="data.list" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">Click Here</a></td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-center">{{ data.quantity }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-center"><a :href="data.ref" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">Click Here</a></td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-center capitalize">{{ data.deadline }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-center capitalize">{{ data.membername }}</td>
                                                 <td class="px-3 py-4 whitespace-nowrap text-center capitalize">{{ data.status }}</td>
                                                 <td class="whitespace-nowrap text-center">
-                                                    <a :href="route('brief.edit', data.id)" class="bg-yellow-400 text-black shadow px-2 py-1 rounded">
+                                                    <a :href="route('task.edit', data.id)" class="bg-yellow-400 text-black shadow px-2 py-1 rounded">
                                                         edit
                                                     </a>
                                                 </td>
@@ -87,7 +87,7 @@
         data: function () {
             return {
                 search: '',
-                brief: this.data
+                task: this.data
             }
         },
         props:['data'],
@@ -97,11 +97,11 @@
         watch:{
             search: function(val){
                 if (val == '') {
-                    this.brief = this.data
+                    this.task = this.data
                 } else {
-                    axios.get(route('brief.search', this.search))
+                    axios.get(route('task.search', this.search))
                     .then(response => {
-                        this.brief = response.data
+                        this.task = response.data
                     }).catch(error => {
                         console.log(error.message)
                     })

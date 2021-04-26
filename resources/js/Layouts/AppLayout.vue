@@ -32,6 +32,9 @@
                                 <jet-nav-link :href="route('brief')" :active="route().current('brief')">
                                     Project Brief
                                 </jet-nav-link>
+                                <jet-nav-link :href="route('task')" :active="route().current('task')">
+                                    Freepik Task
+                                </jet-nav-link>
                                 <!-- <jet-nav-link>
                                     Plan
                                 </jet-nav-link> -->

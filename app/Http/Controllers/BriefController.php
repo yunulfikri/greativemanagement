@@ -23,12 +23,28 @@ class BriefController extends Controller
                 ->latest()->get();
         return response()->json($data);
     }
+    public function edit($id){
+        $member = User::where('role', 'member')->get();
+        $data = Brief::find($id);
+        return Inertia::render('Brief/Edit',['member' => $member,'dataedit' => $data]);
+    }
     public function create(){
         $member = User::where('role', 'member')->get();
         return Inertia::render('Brief/Add', ['member' => $member]);
     }
     public function store(Request $request){
         $store =  Brief::create([
+            'name' => $request->name,
+            'user_id' => $request->user_id,
+            'ref' => $request->ref,
+            'list' => $request->list,
+            'quantity' => $request->quantity,
+            'status' => $request->status,
+        ]);
+        return 'sukses';
+    }
+    public function update(Request $request){
+        $store =  Brief::find($request->id)->update([
             'name' => $request->name,
             'user_id' => $request->user_id,
             'ref' => $request->ref,
