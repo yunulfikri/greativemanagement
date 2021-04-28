@@ -26,6 +26,8 @@
         "vue-loader": "^16.1.2"
     },
     "dependencies": {
-        "jquery": "^3.6.0"
+        "@tinymce/tinymce-vue": "^4.0.0",
+        "jquery": "^3.6.0",
+        "moment": "^2.29.1"
     }
 }

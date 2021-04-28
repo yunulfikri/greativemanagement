@@ -64,6 +64,13 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/task/update', 'FreepikTaskController@update')->name('task.update');
     Route::post('/task/destroy', 'FreepikTaskController@destroy')->name('task.destroy');
     Route::get('/task/search/{q}', 'FreepikTaskController@search')->name('task.search');
+
+
+    Route::get('/plan', 'PlanController@index')->name('plan');
+    Route::get('/plan/add', 'PlanController@create')->name('plan.add');
+    Route::post('/plan/store', 'PlanController@store')->name('plan.store');
+
+
     
 
     Route::get('/accounts/settings', 'AccountController@index')->name('account');
