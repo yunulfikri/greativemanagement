@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Project Plan</h2>
         </template>
         <div class="py-12">
-            <div class="max-w-6xl mb-10 mx-auto sm:px-6 lg:px-8" v-bind:class="{ hidden: isHidden }">
+            <div class="max-w-6xl mb-10 mx-auto sm:px-6 lg:px-8 transition duration-500 ease-in-out" v-bind:class="{ hidden: isHidden }">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-3 min-h-screen">
                     <div class="flex justify-end">
                         <button v-on:click="previewHidden" class="mx-2 my-1 p-1 bg-red-500 text-white rounded">Close</button>
