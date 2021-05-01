@@ -17,7 +17,7 @@
             </div>
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-3 min-h-screen">
-                    <div class="flex justify-between">
+                    <template v-if="$page.props.user.role == 'admin'">
                         <a :href="route('plan.add')"
                             class="px-4 py-2 text-base tracking-wider text-white inline-flex items-center space-x-2 rounded hover:bg-blue-600 mb-5 mt-2 greative-bg-color">
                             <span>
@@ -29,8 +29,8 @@
                                     <path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" /></svg>
                             </span>
                         </a>
-
-
+                        </template>
+                    <div class="flex justify-end">
                         <div>
                             <div class="relative text-gray-600 my-2 focus-within:text-gray-400">
                                 <span class="absolute inset-y-0 left-0 flex items-center pl-2">
@@ -73,9 +73,11 @@
                                                 <td class="px-3 py-4 whitespace-nowrap text-center capitalize">{{ data.status }}</td>
                                                 <td class="px-3 py-4 whitespace-nowrap text-center capitalize">{{ moment(data.created_at).format('LLL') }}</td>
                                                 <td class="whitespace-nowrap text-center">
-                                                    <!-- <a :href="route('plan.edit', data.id)" class="bg-yellow-400 text-black shadow px-2 py-1 rounded">
+                                                    <template v-if="$page.props.user.role == 'admin'">
+                                                    <a :href="route('plan.edit', data.id)" class="bg-yellow-400 text-black shadow px-2 py-1 rounded">
                                                         edit
-                                                    </a> -->
+                                                    </a>
+                                                    </template>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -118,7 +120,7 @@
                 } else {
                     axios.get(route('plan.search', this.search))
                     .then(response => {
-                        this.brief = response.data
+                        this.plan = response.data
                     }).catch(error => {
                         console.log(error.message)
                     })

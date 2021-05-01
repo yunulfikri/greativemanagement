@@ -6,7 +6,7 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-3 min-h-screen">
-                    <div class="flex justify-between">
+                    <template v-if="$page.props.user.role == 'admin'">
                         <a :href="route('task.add')"
                             class="px-4 py-2 text-base tracking-wider text-white inline-flex items-center space-x-2 rounded hover:bg-blue-600 mb-5 mt-2 greative-bg-color">
                             <span>
@@ -18,7 +18,9 @@
                                     <path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" /></svg>
                             </span>
                         </a>
-
+                        </template>
+                    <div class="flex justify-end">
+                        
 
                         <div>
                             <div class="relative text-gray-600 my-2 focus-within:text-gray-400">
@@ -52,7 +54,9 @@
                                                 <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Deadline</th>
                                                 <th class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Member</th>
                                                 <th class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Status</th>
+                                                <template v-if="$page.props.user.role == 'admin'">
                                                 <th class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Edit</th>
+                                                </template>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -65,9 +69,11 @@
                                                 <td class="px-6 py-4 whitespace-nowrap text-center capitalize">{{ data.membername }}</td>
                                                 <td class="px-3 py-4 whitespace-nowrap text-center capitalize">{{ data.status }}</td>
                                                 <td class="whitespace-nowrap text-center">
+                                                    <template v-if="$page.props.user.role == 'admin'">
                                                     <a :href="route('task.edit', data.id)" class="bg-yellow-400 text-black shadow px-2 py-1 rounded">
                                                         edit
                                                     </a>
+                                                    </template>
                                                 </td>
                                             </tr>
                                         </tbody>

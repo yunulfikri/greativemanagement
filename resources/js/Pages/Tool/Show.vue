@@ -1,16 +1,16 @@
 <template>
     <app-layout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Product Guide</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Project Tool</h2>
         </template>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-3 min-h-screen">
-                    <template v-if="$page.props.user.role == 'admin'">
-                        <a :href="route('guide.add')"
+                    <div class="flex justify-between">
+                        <a :href="route('tool.add')"
                             class="px-4 py-2 text-base tracking-wider text-white inline-flex items-center space-x-2 rounded hover:bg-blue-600 mb-5 mt-2 greative-bg-color">
                             <span>
-                                Add New Product Guide
+                                Add New
                             </span>
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current"
@@ -18,9 +18,7 @@
                                     <path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" /></svg>
                             </span>
                         </a>
-                        </template>
-                    <div class="flex justify-end">
-                        
+
 
                         <div>
                             <div class="relative text-gray-600 my-2 focus-within:text-gray-400">
@@ -42,36 +40,31 @@
 
                     <div class="flex flex-col">
                         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                            
                             <div class="py-2 align-middle inline-block w-full sm:px-6 lg:px-8">
                                 <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                                     <table class="table-auto divide-y divide-gray-200 w-full">
                                         <thead>
                                             <tr class="bg-gray-500">
                                                 <th class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">No</th>
-                                                <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Guide Name</th>
-                                                <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Description</th>
-                                                <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Tag</th>
-                                                <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Link</th>
-                                                <template v-if="$page.props.user.role == 'admin'">
+                                                <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Name</th>
+                                                <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Content</th>
+                                                <th class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Created At</th>
+                                                <th class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Updated At</th>
                                                 <th class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Edit</th>
-                                                </template>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="(data, index) in guides" :key="data.id">
+                                            <tr v-for="(data, index) in tools" :key="data.id">
                                                 <td class="px-3 py-4 whitespace-nowrap text-center">{{ index+1 }}</td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-center">{{ data.name }}</td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-left">{{ data.description }}</td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-left">{{ data.tag }}</td>
-                                                <td class="px-3 py-4 whitespace-nowrap text-center">
-                                                    <a :href="data.link" target="_blank" class="hover:text-blue-500">Click Here</a>
-                                                </td>
-                                                <td class="justify-center">
-                                                    <template v-if="$page.props.user.role == 'admin'">
-                                                    <a :href="route('guide.edit', data.id)" class="text-center">
-                                                        <img height="20" width="20" :src="'img/settings.png'" alt="" srcset="">
+                                                <td class="px-6 py-4 text-center">{{ data.name }}</td>
+                                                <td class="px-6 py-4 capitalize max-w-xs">{{ data.content }}</td>
+                                                <td class="px-3 py-4 whitespace-nowrap text-center capitalize">{{ moment(data.created_at).format('LLL') }}</td>
+                                                <td class="px-3 py-4 whitespace-nowrap text-center capitalize">{{ moment(data.updated_at).format('LLL') }}</td>
+                                                <td class="whitespace-nowrap text-center">
+                                                    <a :href="route('tool.edit', data.id)" class="bg-yellow-400 text-black shadow px-2 py-1 rounded">
+                                                        edit
                                                     </a>
-                                                    </template>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -87,29 +80,42 @@
 </template>
 <script>
     import AppLayout from "@/Layouts/AppLayout";
+    import moment from 'moment';
     export default {
         data: function () {
             return {
+                moment : moment,
                 search: '',
-                guides: this.data
+                tools: this.data,
             }
         },
         props:['data'],
         components: {
             AppLayout,
         },
+        computed:{
+            
+        },
         watch:{
             search: function(val){
                 if (val == '') {
-                    this.guides = this.data
+                    this.tools = this.data
                 } else {
-                    axios.get(route('guide.search', this.search))
+                    axios.get(route('tool.search', this.search))
                     .then(response => {
-                        this.guides = response.data
+                        this.tools = response.data
                     }).catch(error => {
                         console.log(error.message)
                     })
                 }
+            }
+        },
+        methods:{
+            truncate(value, limit){
+                 if (value.length > limit) {
+                    value = value.substring(0, (limit - 3)) + '...';
+                }
+                return value
             }
         }
     }

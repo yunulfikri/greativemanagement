@@ -68,9 +68,20 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('/plan', 'PlanController@index')->name('plan');
     Route::get('/plan/add', 'PlanController@create')->name('plan.add');
+    Route::get('/plan/{id}/edit', 'PlanController@edit')->name('plan.edit');
     Route::post('/plan/store', 'PlanController@store')->name('plan.store');
+    Route::post('/plan/update', 'PlanController@update')->name('plan.update');
+    Route::post('/plan/destroy', 'PlanController@destroy')->name('plan.destroy');
+    Route::get('/plan/{q}/search', 'PlanController@search')->name('plan.search');
 
 
+    Route::get('/tool', 'ToolController@index')->name('tool');
+    Route::get('/tool/add', 'ToolController@create')->name('tool.add');
+    Route::post('/tool/store', 'ToolController@store')->name('tool.store');
+    Route::post('/tool/update', 'ToolController@update')->name('tool.update');
+    Route::post('/tool/destroy', 'ToolController@destroy')->name('tool.destroy');
+    Route::get('/tool/{id}/edit', 'ToolController@edit')->name('tool.edit');
+    Route::get('/tool/search/{q}', 'ToolController@search')->name('tool.search');
     
 
     Route::get('/accounts/settings', 'AccountController@index')->name('account');

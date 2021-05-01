@@ -43,7 +43,10 @@
                                 </jet-nav-link>
                                 <jet-nav-link :href="route('plan')" :active="route().current('plan')">
                                         Plan
-                                    </jet-nav-link>
+                                </jet-nav-link>
+                                <jet-nav-link :href="route('tool')" :active="route().current('tool')">
+                                        Tools
+                                </jet-nav-link>
                             </template>
 
                         </div>

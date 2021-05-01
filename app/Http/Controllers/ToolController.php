@@ -4,47 +4,48 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use App\Models\Plan;
-class PlanController extends Controller
+use App\Models\Tool;
+class ToolController extends Controller
 {
     //
     public function index(){
-        $data = Plan::latest()->get();
-        return Inertia::render('Plan/Show',['data' => $data]);
+        $data = Tool::latest()->get();
+        return Inertia::render('Tool/Show', ['data'=>$data]);
     }
     public function search(Request $request){
-        $search = Plan::where('name', 'like', '%' . $request->q . '%')
+        $search = Tool::where('name', 'like', '%' . $request->q . '%')
+        ->orWhere('content', 'like', '%' . $request->q . '%')
         ->get();
         return response()->json($search);
     }
     public function create(){
-        return Inertia::render('Plan/Add');
+        return Inertia::render('Tool/Add');
     }
     public function store(Request $request){
-        Plan::create([
+        $data = Tool::create([
             'name' => $request->name,
-            'contents' => $request->contents,
-            'status' => $request->status
+            'content' => $request->content
         ]);
         return 'sukses';
     }
     public function edit($id){
-        $data = Plan::find($id);
+        $data = Tool::find($id);
         if ($data) {
-            return Inertia::render('Plan/Edit', ['editadata' => $data]);
+            return Inertia::render('Tool/Edit', ['dataedit'=>$data]);
+            
         }else{
             abort(404);
         }
+
     }
     public function update(Request $request){
-        $data = Plan::find($request->id)->update([
+        $data = Tool::find($request->id)->update([
             'name' => $request->name,
-            'contents' => $request->contents,
-            'status' => $request->status
+            'content' => $request->content
         ]);
         return 'sukses';
     }
     public function destroy(Request $request){
-        Plan::destroy($request->id);
+        Tool::destroy($request->id);
     }
 }

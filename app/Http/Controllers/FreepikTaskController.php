@@ -42,7 +42,12 @@ class FreepikTaskController extends Controller
     public function edit($id){
         $member = User::where('role', 'member')->get();
         $data = FreepikTask::find($id);
-        return Inertia::render('Task/Edit', ['member'=>$member, 'dataedit' => $data]);
+        if ($data) {
+            # code...
+            return Inertia::render('Task/Edit', ['member'=>$member, 'dataedit' => $data]);
+        }else{
+            abort(404);
+        }
     }
     public function update(Request $request){
         FreepikTask::find($request->id)->update([
