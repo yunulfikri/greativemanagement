@@ -43,7 +43,7 @@ class HandleInertiaRequests extends Middleware
             # code...
             $teamid = $request->user();
             $teamname = Team::find($teamid->current_team_id);
-            $teamuser = TeamUser::where('user_id',13)
+            $teamuser = TeamUser::where('user_id',$teamid->id)
                         ->join('teams', 'teams.id', '=', 'teams_users.team_id')
                         ->select('teams.*')
                         ->get();
