@@ -59,7 +59,7 @@
                                         <tbody>
                                             <tr v-for="(data, index) in files" :key="data.id">
                                                 <td class="px-3 py-4 whitespace-nowrap text-center">{{ index+1 }}</td>
-                                                <td class="px-6 py-4 text-center">{{ data.name }}</td>
+                                                <td class="px-6 py-4 text-left" style="overflow-wrap: anywhere;">{{ data.name }}</td>
                                                 <td class="px-6 py-4 capitalize max-w-xs"><a :href="route('file.download', data.id)" target="_blank" rel="noopener noreferrer">Download</a></td>
                                                 <td class="px-6 py-4 text-center">{{ data.uploader }}</td>
                                                 <td class="px-3 py-4 whitespace-nowrap text-center capitalize">{{ moment(data.updated_at).format('LLL') }}</td>
@@ -104,7 +104,9 @@ export default {
     props: ['files'],
     methods: {
         submit() {
-            this.form.post('/file/upload')
+            this.form.post('/file/upload',{
+                onSuccess: () => window.location.href = route('file.index')
+            })
         },
         reset() {
             this.formUpload = {
