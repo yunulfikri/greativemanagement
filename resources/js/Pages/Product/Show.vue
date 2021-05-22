@@ -60,7 +60,16 @@
                                                 <td rowspan="4" class="px-6 py-4 whitespace-nowrap text-center border-b-2 border-gray-300">{{ data.name }} </td>
                                                 <td rowspan="4" class="px-6 py-4 whitespace-nowrap text-center border-b-2 border-gray-300 capitalize">
                                                     <template v-if="data.status == 'abort'">
-                                                        <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-indigo-100 bg-red-700 rounded">Abort</span>
+                                                        <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-700 rounded">Abort</span>
+                                                    </template>
+                                                    <template v-else-if="data.status == 'pending'">
+                                                        <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-yellow-500 rounded">{{ data.status }}</span>
+                                                    </template>
+                                                    <template v-else-if="data.status == 'done'">
+                                                        <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-green-500 rounded">{{ data.status }}</span>
+                                                    </template>
+                                                    <template v-else-if="data.status == 'new'">
+                                                        <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-blue-500 rounded">{{ data.status }}</span>
                                                     </template>
                                                     <template v-else>{{ data.status }}</template>
                                                 </td>
@@ -80,48 +89,84 @@
                                             </tr>
                                             <tr>
                                                 <td class="px-6 py-4 whitespace-nowrap text-center">
-                                                    <template v-if="data.CreativeMarket == true">
-                                                        <input type="checkbox" checked disabled class="appearance-none bg-gray-500 checked:border-transparent">
+                                                    <template v-if="data.CreativeMarket != null">
+                                                        <a :href="data.CreativeMarket" target="_blank" style="text-align: -webkit-center">
+                                                        <div>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+</svg>
+                                                        </div>
+                                                        </a>
                                                     </template>
                                                     <template v-else>
                                                         <input type="checkbox" disabled class="appearance-none bg-gray-500 checked:border-transparent">
                                                     </template>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-center">
-                                                    <template v-if="data.Website == true">
-                                                        <input type="checkbox" checked disabled class="appearance-none bg-gray-500 checked:border-transparent">
+                                                    <template v-if="data.Website != null">
+                                                        <a :href="data.Website" target="_blank" style="text-align: -webkit-center">
+                                                        <div>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+</svg>
+                                                        </div>
+                                                        </a>
                                                     </template>
                                                     <template v-else>
                                                         <input type="checkbox" disabled class="appearance-none bg-gray-500 checked:border-transparent">
                                                     </template>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-center">
-                                                    <template v-if="data.Element == true">
-                                                        <input type="checkbox" checked disabled class="appearance-none bg-gray-500 checked:border-transparent">
+                                                    <template v-if="data.Element != null">
+                                                        <a :href="data.Element" target="_blank" style="text-align: -webkit-center">
+                                                        <div>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+</svg>
+                                                        </div>
+                                                        </a>
                                                     </template>
                                                     <template v-else>
                                                         <input type="checkbox" disabled class="appearance-none bg-gray-500 checked:border-transparent">
                                                     </template>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-center">
-                                                    <template v-if="data.Canva == true">
-                                                        <input type="checkbox" checked disabled class="appearance-none bg-gray-500 checked:border-transparent">
+                                                    <template v-if="data.Canva != null">
+                                                        <a :href="data.Canva" target="_blank" style="text-align: -webkit-center">
+                                                        <div>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+</svg>
+                                                        </div>
+                                                        </a>
                                                     </template>
                                                     <template v-else>
                                                         <input type="checkbox" disabled class="appearance-none bg-gray-500 checked:border-transparent">
                                                     </template>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-center">
-                                                    <template v-if="data.Etsy == true">
-                                                        <input type="checkbox" checked disabled class="appearance-none bg-gray-500 checked:border-transparent">
+                                                    <template v-if="data.Etsy != null">
+                                                        <a :href="data.Etsy" target="_blank" style="text-align: -webkit-center">
+                                                        <div>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+</svg>
+                                                        </div>
+                                                        </a>
                                                     </template>
                                                     <template v-else>
                                                         <input type="checkbox" disabled class="appearance-none bg-gray-500 checked:border-transparent">
                                                     </template>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-center">
-                                                    <template v-if="data.DesignBundles == true">
-                                                        <input type="checkbox" checked disabled class="appearance-none bg-gray-500 checked:border-transparent">
+                                                    <template v-if="data.DesignBundles != null">
+                                                        <a :href="data.DesignBundles" target="_blank" style="text-align: -webkit-center">
+                                                        <div>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+</svg>
+                                                        </div>
+                                                        </a>
                                                     </template>
                                                     <template v-else>
                                                         <input type="checkbox" disabled class="appearance-none bg-gray-500 checked:border-transparent">
@@ -138,40 +183,70 @@
                                             </tr>
                                             <tr>
                                                 <td class="px-6 py-4 whitespace-nowrap text-center border-b-2 border-gray-300">
-                                                    <template v-if="data.Crella == true">
-                                                        <input type="checkbox" checked disabled class="appearance-none bg-gray-500 checked:border-transparent">
+                                                    <template v-if="data.Crella != null">
+                                                        <a :href="data.Crella" target="_blank" style="text-align: -webkit-center">
+                                                        <div>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+</svg>
+                                                        </div>
+                                                        </a>
                                                     </template>
                                                     <template v-else>
                                                         <input type="checkbox" disabled class="appearance-none bg-gray-500 checked:border-transparent">
                                                     </template>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-center  border-b-2 border-gray-300">
-                                                    <template v-if="data.TemplateMonster == true">
-                                                        <input type="checkbox" checked disabled class="appearance-none bg-gray-500 checked:border-transparent">
+                                                    <template v-if="data.TemplateMonster != null">
+                                                        <a :href="data.TemplateMonster" target="_blank" style="text-align: -webkit-center">
+                                                        <div>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+</svg>
+                                                        </div>
+                                                        </a>
                                                     </template>
                                                     <template v-else>
                                                         <input type="checkbox" disabled class="appearance-none bg-gray-500 checked:border-transparent">
                                                     </template>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-center  border-b-2 border-gray-300">
-                                                    <template v-if="data.Dafont == true">
-                                                        <input type="checkbox" checked disabled class="appearance-none bg-gray-500 checked:border-transparent">
+                                                    <template v-if="data.Dafont != null">
+                                                        <a :href="data.Dafont" target="_blank" style="text-align: -webkit-center">
+                                                        <div>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+</svg>
+                                                        </div>
+                                                        </a>
                                                     </template>
                                                     <template v-else>
                                                         <input type="checkbox" disabled class="appearance-none bg-gray-500 checked:border-transparent">
                                                     </template>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-center  border-b-2 border-gray-300">
-                                                    <template v-if="data.TheHungryJPEG == true">
-                                                        <input type="checkbox" checked disabled class="appearance-none bg-gray-500 checked:border-transparent">
+                                                    <template v-if="data.TheHungryJPEG != null">
+                                                        <a :href="data.TheHungryJPEG" target="_blank" style="text-align: -webkit-center">
+                                                        <div>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+</svg>
+                                                        </div>
+                                                        </a>
                                                     </template>
                                                     <template v-else>
                                                         <input type="checkbox" disabled class="appearance-none bg-gray-500 checked:border-transparent">
                                                     </template>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-center  border-b-2 border-gray-300">
-                                                    <template v-if="data.FDR == true">
-                                                        <input type="checkbox" checked disabled class="appearance-none bg-gray-500 checked:border-transparent">
+                                                    <template v-if="data.FDR != null">
+                                                        <a :href="data.FDR" target="_blank" style="text-align: -webkit-center">
+                                                        <div>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+</svg>
+                                                        </div>
+                                                        </a>
                                                     </template>
                                                     <template v-else>
                                                         <input type="checkbox" disabled class="appearance-none bg-gray-500 checked:border-transparent">

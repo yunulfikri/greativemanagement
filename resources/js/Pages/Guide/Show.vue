@@ -1,7 +1,7 @@
 <template>
     <app-layout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Product Guide</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Preview Guide</h2>
         </template>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -10,7 +10,7 @@
                         <a :href="route('guide.add')"
                             class="px-4 py-2 text-base tracking-wider text-white inline-flex items-center space-x-2 rounded hover:bg-blue-600 mb-5 mt-2 greative-bg-color">
                             <span>
-                                Add New Product Guide
+                                Add New Preview Guide
                             </span>
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current"
@@ -48,7 +48,7 @@
                                         <thead>
                                             <tr class="bg-gray-500">
                                                 <th class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">No</th>
-                                                <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Guide Name</th>
+                                                <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Name</th>
                                                 <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Description</th>
                                                 <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Tag</th>
                                                 <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Link</th>

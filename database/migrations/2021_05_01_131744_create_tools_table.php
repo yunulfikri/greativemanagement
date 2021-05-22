@@ -13,7 +13,19 @@ class CreateToolsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tools', function (Blueprint $table) {
+        Schema::create('cmtag', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->text('content');
+            $table->timestamps();
+        });
+        Schema::create('etsytag', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->text('content');
+            $table->timestamps();
+        });
+        Schema::create('elementtag', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->text('content');
@@ -28,6 +40,8 @@ class CreateToolsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tools');
+        Schema::dropIfExists('cmtag');
+        Schema::dropIfExists('etsytag');
+        Schema::dropIfExists('elementtag');
     }
 }

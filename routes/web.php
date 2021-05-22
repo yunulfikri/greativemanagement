@@ -16,6 +16,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
+    return redirect()->route('dashboard');
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -66,26 +67,50 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/task/search/{q}', 'FreepikTaskController@search')->name('task.search');
 
 
-    Route::get('/plan', 'PlanController@index')->name('plan');
-    Route::get('/plan/add', 'PlanController@create')->name('plan.add');
-    Route::get('/plan/{id}/edit', 'PlanController@edit')->name('plan.edit');
-    Route::post('/plan/store', 'PlanController@store')->name('plan.store');
-    Route::post('/plan/update', 'PlanController@update')->name('plan.update');
-    Route::post('/plan/destroy', 'PlanController@destroy')->name('plan.destroy');
-    Route::get('/plan/{q}/search', 'PlanController@search')->name('plan.search');
-
+    Route::get('/product-desc', 'PlanController@index')->name('plan');
+    Route::get('/product-desc/add', 'PlanController@create')->name('plan.add');
+    Route::get('/product-desc/{id}/edit', 'PlanController@edit')->name('plan.edit');
+    Route::post('/product-desc/store', 'PlanController@store')->name('plan.store');
+    Route::post('/product-desc/update', 'PlanController@update')->name('plan.update');
+    Route::post('/product-desc/destroy', 'PlanController@destroy')->name('plan.destroy');
+    Route::get('/product-desc/{q}/search', 'PlanController@search')->name('plan.search');
 
     Route::get('/tool', 'ToolController@index')->name('tool');
-    Route::get('/tool/add', 'ToolController@create')->name('tool.add');
-    Route::post('/tool/store', 'ToolController@store')->name('tool.store');
-    Route::post('/tool/update', 'ToolController@update')->name('tool.update');
-    Route::post('/tool/destroy', 'ToolController@destroy')->name('tool.destroy');
-    Route::get('/tool/{id}/edit', 'ToolController@edit')->name('tool.edit');
-    Route::get('/tool/search/{q}', 'ToolController@search')->name('tool.search');
+
+    Route::get('/tool/cmtag', 'ToolController@cmindex')->name('tool.cm');
+    Route::get('/tool/cmtag/add', 'ToolController@cmcreate')->name('tool.cm.add');
+    Route::post('/tool/cmtag/store', 'ToolController@cmstore')->name('tool.cm.store');
+    Route::post('/tool/cmtag/update', 'ToolController@cmupdate')->name('tool.cm.update');
+    Route::post('/tool/cmtag/destroy', 'ToolController@cmdestroy')->name('tool.cm.destroy');
+    Route::get('/tool/cmtag/{id}/edit', 'ToolController@cmedit')->name('tool.cm.edit');
+    Route::get('/tool/cmtag/search/{q}', 'ToolController@cmsearch')->name('tool.cm.search');
     
+
+    Route::get('/tool/etsy', 'ToolController@etsyindex')->name('tool.etsy');
+    Route::get('/tool/etsy/add', 'ToolController@etsycreate')->name('tool.etsy.add');
+    Route::post('/tool/etsy/store', 'ToolController@etsystore')->name('tool.etsy.store');
+    Route::post('/tool/etsy/update', 'ToolController@etsyupdate')->name('tool.etsy.update');
+    Route::post('/tool/etsy/destroy', 'ToolController@etsydestroy')->name('tool.etsy.destroy');
+    Route::get('/tool/etsy/{id}/edit', 'ToolController@etsyedit')->name('tool.etsy.edit');
+    Route::get('/tool/etsy/search/{q}', 'ToolController@etsysearch')->name('tool.etsy.search');
+
+
+    Route::get('/tool/element', 'ToolController@elementindex')->name('tool.element');
+    Route::get('/tool/element/add', 'ToolController@elementcreate')->name('tool.element.add');
+    Route::post('/tool/element/store', 'ToolController@elementstore')->name('tool.element.store');
+    Route::post('/tool/element/update', 'ToolController@elementupdate')->name('tool.element.update');
+    Route::post('/tool/element/destroy', 'ToolController@elementdestroy')->name('tool.element.destroy');
+    Route::get('/tool/element/{id}/edit', 'ToolController@elementedit')->name('tool.element.edit');
+    Route::get('/tool/element/search/{q}', 'ToolController@elementsearch')->name('tool.element.search');
 
     Route::get('/accounts/settings', 'AccountController@index')->name('account');
     Route::post('/accounts/store', 'AccountController@store')->name('account.store');
     Route::post('/accounts/destroy', 'AccountController@destroy')->name('account.destroy');
     Route::put('/account/current-team-switch', 'AccountController@currentteamupdate')->name('account.currentteamupdate');
+
+    Route::get('/file/upload', 'FileController@index')->name('file.index');
+    Route::get('/file/{id}/download', 'FileController@download')->name('file.download');
+    Route::post('/file/upload', 'FileController@upload')->name('file.upload');
+    Route::get('/file/{id}/destroy', 'FileController@destroy')->name('file.destroy');
+
 });

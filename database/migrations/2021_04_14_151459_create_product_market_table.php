@@ -17,17 +17,17 @@ class CreateProductMarketTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('status');
-            $table->boolean('CreativeMarket')->default(false);
-            $table->boolean('Website')->default(false);
-            $table->boolean('Element')->default(false);
-            $table->boolean('Canva')->default(false);
-            $table->boolean('Etsy')->default(false);
-            $table->boolean('DesignBundles')->default(false);
-            $table->boolean('Crella')->default(false);
-            $table->boolean('TemplateMonster')->default(false);
-            $table->boolean('Dafont')->default(false);
-            $table->boolean('TheHungryJPEG')->default(false);
-            $table->boolean('FDR')->default(false);
+            $table->string('CreativeMarket')->nullable();
+            $table->string('Website')->nullable();
+            $table->string('Element')->nullable();
+            $table->string('Canva')->nullable();
+            $table->string('Etsy')->nullable();
+            $table->string('DesignBundles')->nullable();
+            $table->string('Crella')->nullable();
+            $table->string('TemplateMonster')->nullable();
+            $table->string('Dafont')->nullable();
+            $table->string('TheHungryJPEG')->nullable();
+            $table->string('FDR')->nullable();
             $table->timestamps();
         });
     }

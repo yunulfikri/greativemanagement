@@ -4,7 +4,7 @@
         <div class="flex justify-between">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Add New</h2>
             <div class="text-right">
-                <a :href="route('tool')" class="bg-red-500 text-white rounded py-2 px-3">Back</a>
+                <a :href="route('tool.etsy')" class="bg-red-500 text-white rounded py-2 px-3">Back</a>
             </div>
         </div>
     </template>
@@ -18,13 +18,12 @@
                 </div>
                 <hr class="mb-6 w-full">
                 <div class="mb-6 w-full">
-                    <label for="name" class="block mb-2 text-lg text-gray-600 dark:text-gray-400">Plan
+                    <label for="name" class="block mb-2 text-lg text-gray-600 dark:text-gray-400">
                         Name</label>
-                    <input type="text" v-model="formTool.name" name="name" id="name" placeholder="Yoria Package" required class="w-full px-3 py-2 placeholder-gray-300 border border-gray-lighter rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
+                    <input type="text" v-model="formTool.name" name="name" id="name" required class="w-full px-3 py-2 placeholder-gray-300 border border-gray-lighter rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
                 </div>
                 <div class="mb-6 w-full">
-                    <label for="name" class="block mb-2 text-lg text-gray-600 dark:text-gray-400">Plan
-                        Content</label>
+                    <label for="name" class="block mb-2 text-lg text-gray-600 dark:text-gray-400">Content</label>
                     <textarea name="" id="" cols="30" rows="10" v-model="formTool.content" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-lighter rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"></textarea>
                 </div>
                 <div class="flex">
@@ -61,22 +60,22 @@ export default {
     props:['dataedit'],
     methods: {
         saveTool() {
-            axios.post(route('tool.update'), this.formTool)
+            axios.post(route('tool.etsy.update'), this.formTool)
                 .then(response => {
                     console.log(response.data)
                     this.reset()
-                    window.location.href = route('tool')
+                    window.location.href = route('tool.etsy')
                 }).catch(error => {
                     console.log(error)
                     alert('gagal menyimpan, periksa kembali')
                 })
         },
         destroy(){
-            axios.post(route('tool.destroy'), this.formTool)
+            axios.post(route('tool.etsy.destroy'), this.formTool)
                 .then(response => {
                     console.log(response.data)
                     this.reset()
-                    window.location.href = route('tool')
+                    window.location.href = route('tool.etsy')
                 }).catch(error => {
                     console.log(error)
                     alert('gagal menyimpan, periksa kembali')

@@ -24,7 +24,7 @@
                                 Product
                             </jet-nav-link>
                             <jet-nav-link :href="route('guide')" :active="route().current('guide')">
-                                Product Guide
+                                Preview Guide
                             </jet-nav-link>
                             <jet-nav-link :href="route('brief')" :active="route().current('brief')">
                                 Project Brief
@@ -41,9 +41,9 @@
                                 <jet-nav-link :href="route('account')" :active="route().current('account')">
                                     Account Member
                                 </jet-nav-link>
-                                <jet-nav-link :href="route('plan')" :active="route().current('plan')">
+                                <!-- <jet-nav-link :href="route('plan')" :active="route().current('plan')">
                                         Plan
-                                </jet-nav-link>
+                                </jet-nav-link> -->
                                 <jet-nav-link :href="route('tool')" :active="route().current('tool')">
                                         Tools
                                 </jet-nav-link>

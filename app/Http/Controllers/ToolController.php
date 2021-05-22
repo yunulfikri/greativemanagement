@@ -4,48 +4,150 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use App\Models\Tool;
+use App\Models\ToolCM;
+use App\Models\ToolEtsy;
+use App\Models\ToolElement;
+
 class ToolController extends Controller
 {
     //
+
     public function index(){
-        $data = Tool::latest()->get();
-        return Inertia::render('Tool/Show', ['data'=>$data]);
+        return Inertia::render('Tool/Index');
     }
-    public function search(Request $request){
-        $search = Tool::where('name', 'like', '%' . $request->q . '%')
+
+
+    // ------ CM TOOLS CONTROLLER ----------//
+
+    public function cmindex(){
+        $data = ToolCM::latest()->get();
+        return Inertia::render('Tool/cmtool/Show', ['data'=>$data]);
+    }
+    public function cmsearch(Request $request){
+        $search = ToolCM::where('name', 'like', '%' . $request->q . '%')
         ->orWhere('content', 'like', '%' . $request->q . '%')
         ->get();
         return response()->json($search);
     }
-    public function create(){
-        return Inertia::render('Tool/Add');
+    public function cmcreate(){
+        return Inertia::render('Tool/cmtool/Add');
     }
-    public function store(Request $request){
-        $data = Tool::create([
+    public function cmstore(Request $request){
+        $data = ToolCM::create([
             'name' => $request->name,
             'content' => $request->content
         ]);
         return 'sukses';
     }
-    public function edit($id){
-        $data = Tool::find($id);
+    public function cmedit($id){
+        $data = ToolCM::find($id);
         if ($data) {
-            return Inertia::render('Tool/Edit', ['dataedit'=>$data]);
+            return Inertia::render('Tool/cmtool/Edit', ['dataedit'=>$data]);
             
         }else{
             abort(404);
         }
 
     }
-    public function update(Request $request){
-        $data = Tool::find($request->id)->update([
+    public function cmupdate(Request $request){
+        $data = ToolCM::find($request->id)->update([
             'name' => $request->name,
             'content' => $request->content
         ]);
         return 'sukses';
     }
-    public function destroy(Request $request){
-        Tool::destroy($request->id);
+    public function cmdestroy(Request $request){
+        ToolCM::destroy($request->id);
     }
+
+
+
+
+    // ------ ETSY TOOLS CONTROLLER ----------//
+
+    public function etsyindex(){
+        $data = ToolEtsy::latest()->get();
+        return Inertia::render('Tool/etsytool/Show', ['data'=>$data]);
+    }
+    public function etsysearch(Request $request){
+        $search = ToolEtsy::where('name', 'like', '%' . $request->q . '%')
+        ->orWhere('content', 'like', '%' . $request->q . '%')
+        ->get();
+        return response()->json($search);
+    }
+    public function etsycreate(){
+        return Inertia::render('Tool/etsytool/Add');
+    }
+    public function etsystore(Request $request){
+        $data = ToolEtsy::create([
+            'name' => $request->name,
+            'content' => $request->content
+        ]);
+        return 'sukses';
+    }
+    public function etsyedit($id){
+        $data = ToolEtsy::find($id);
+        if ($data) {
+            return Inertia::render('Tool/etsytool/Edit', ['dataedit'=>$data]);
+            
+        }else{
+            abort(404);
+        }
+
+    }
+    public function etsyupdate(Request $request){
+        $data = ToolEtsy::find($request->id)->update([
+            'name' => $request->name,
+            'content' => $request->content
+        ]);
+        return 'sukses';
+    }
+    public function etsydestroy(Request $request){
+        ToolEtsy::destroy($request->id);
+    }
+
+
+
+        // ------ ELement TOOLS CONTROLLER ----------//
+
+        public function elementindex(){
+            $data = ToolElement::latest()->get();
+            return Inertia::render('Tool/elementtool/Show', ['data'=>$data]);
+        }
+        public function elementsearch(Request $request){
+            $search = ToolElement::where('name', 'like', '%' . $request->q . '%')
+            ->orWhere('content', 'like', '%' . $request->q . '%')
+            ->get();
+            return response()->json($search);
+        }
+        public function elementcreate(){
+            return Inertia::render('Tool/elementtool/Add');
+        }
+        public function elementstore(Request $request){
+            $data = ToolElement::create([
+                'name' => $request->name,
+                'content' => $request->content
+            ]);
+            return 'sukses';
+        }
+        public function elementedit($id){
+            $data = ToolElement::find($id);
+            if ($data) {
+                return Inertia::render('Tool/elementtool/Edit', ['dataedit'=>$data]);
+                
+            }else{
+                abort(404);
+            }
+    
+        }
+        public function elementupdate(Request $request){
+            $data = ToolElement::find($request->id)->update([
+                'name' => $request->name,
+                'content' => $request->content
+            ]);
+            return 'sukses';
+        }
+        public function elementdestroy(Request $request){
+            ToolElement::destroy($request->id);
+        }
 }

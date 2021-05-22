@@ -67,7 +67,21 @@
                                                 <td class="px-6 py-4 whitespace-nowrap text-center"><a :href="data.ref" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">Click Here</a></td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-center"><a :href="data.list" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">Click Here</a></td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-center">{{ data.quantity }}</td>
-                                                <td class="px-3 py-4 whitespace-nowrap text-center capitalize">{{ data.status }}</td>
+                                                <td class="px-3 py-4 whitespace-nowrap text-center capitalize">
+                                                    <template v-if="data.status == 'abort'">
+                                                        <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-700 rounded">Abort</span>
+                                                    </template>
+                                                    <template v-else-if="data.status == 'pending'">
+                                                        <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-yellow-500 rounded">{{ data.status }}</span>
+                                                    </template>
+                                                    <template v-else-if="data.status == 'done'">
+                                                        <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-green-500 rounded">{{ data.status }}</span>
+                                                    </template>
+                                                    <template v-else-if="data.status == 'new'">
+                                                        <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-blue-500 rounded">{{ data.status }}</span>
+                                                    </template>
+                                                    <template v-else>{{ data.status }}</template>
+                                                </td>
                                                 <td class="whitespace-nowrap text-center">
                                                     <template v-if="$page.props.user.role == 'admin'">
                                                     <a :href="route('brief.edit', data.id)" class="bg-yellow-400 text-black shadow px-2 py-1 rounded">

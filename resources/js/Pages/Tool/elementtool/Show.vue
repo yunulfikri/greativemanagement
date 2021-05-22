@@ -1,13 +1,13 @@
 <template>
     <app-layout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Project Tool</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Tool - Element Tag</h2>
         </template>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-3 min-h-screen">
                     <div class="flex justify-between">
-                        <a :href="route('tool.add')"
+                        <a :href="route('tool.element.add')"
                             class="px-4 py-2 text-base tracking-wider text-white inline-flex items-center space-x-2 rounded hover:bg-blue-600 mb-5 mt-2 greative-bg-color">
                             <span>
                                 Add New
@@ -49,7 +49,6 @@
                                                 <th class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">No</th>
                                                 <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Name</th>
                                                 <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Content</th>
-                                                <th class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Created At</th>
                                                 <th class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Updated At</th>
                                                 <th class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Edit</th>
                                             </tr>
@@ -59,10 +58,9 @@
                                                 <td class="px-3 py-4 whitespace-nowrap text-center">{{ index+1 }}</td>
                                                 <td class="px-6 py-4 text-center">{{ data.name }}</td>
                                                 <td class="px-6 py-4 capitalize max-w-xs">{{ data.content }}</td>
-                                                <td class="px-3 py-4 whitespace-nowrap text-center capitalize">{{ moment(data.created_at).format('LLL') }}</td>
                                                 <td class="px-3 py-4 whitespace-nowrap text-center capitalize">{{ moment(data.updated_at).format('LLL') }}</td>
                                                 <td class="whitespace-nowrap text-center">
-                                                    <a :href="route('tool.edit', data.id)" class="bg-yellow-400 text-black shadow px-2 py-1 rounded">
+                                                    <a :href="route('tool.element.edit', data.id)" class="bg-yellow-400 text-black shadow px-2 py-1 rounded">
                                                         edit
                                                     </a>
                                                 </td>
@@ -101,7 +99,7 @@
                 if (val == '') {
                     this.tools = this.data
                 } else {
-                    axios.get(route('tool.search', this.search))
+                    axios.get(route('tool.element.search', this.search))
                     .then(response => {
                         this.tools = response.data
                     }).catch(error => {
