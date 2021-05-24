@@ -40,6 +40,25 @@
                             </select>
                         </div>
                     </div>
+                    <div class="mb-6 max-w-full">
+                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+                            for="grid-state">
+                            Category
+                        </label>
+                        <div class="relative">
+                            <select
+                                class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded"
+                                id="grid-state" v-model="formProduct.category">
+                                <option value="presentation">Presentation</option>
+                                <option value="social media template">Social Media Template</option>
+                                <option value="Template">Template</option>
+                                <option value="Font">Font</option>
+                                <option value="Mockup">Mockup</option>
+                                <option value="Illustration">Illustration</option>
+                                <option value="Brochure & Flyer">Brochure & Flyer</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="mb-6 max-w-full m-1 p-2 shadow rounded">
                         <p class="text-center">Marketplace</p>
                         <hr class="my-1">
@@ -110,6 +129,7 @@
                 formProduct: {
                     name: '',
                     status: 'new',
+                    category:'Illustration',
                     Creativemarket: '',
                     Website: '',
                     Element: '',
@@ -144,6 +164,7 @@
                     name: '',
                     status: 'new',
                     Creativemarket: '',
+                    category:'',
                     Website: '',
                     Element: '',
                     Canva: '',

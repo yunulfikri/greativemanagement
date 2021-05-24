@@ -28,6 +28,7 @@ class CreateProductMarketTable extends Migration
             $table->string('Dafont')->nullable();
             $table->string('TheHungryJPEG')->nullable();
             $table->string('FDR')->nullable();
+            $table->string('category');
             $table->timestamps();
         });
     }

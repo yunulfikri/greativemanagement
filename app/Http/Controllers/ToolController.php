@@ -7,6 +7,8 @@ use Inertia\Inertia;
 use App\Models\ToolCM;
 use App\Models\ToolEtsy;
 use App\Models\ToolElement;
+use App\Models\ToolCanva;
+
 
 class ToolController extends Controller
 {
@@ -150,4 +152,50 @@ class ToolController extends Controller
         public function elementdestroy(Request $request){
             ToolElement::destroy($request->id);
         }
+
+
+
+
+              // ------ Canva TOOLS CONTROLLER ----------//
+
+              public function canvaindex(){
+                $data = ToolCanva::latest()->get();
+                return Inertia::render('Tool/canvatool/Show', ['data'=>$data]);
+            }
+            public function canvasearch(Request $request){
+                $search = ToolElement::where('name', 'like', '%' . $request->q . '%')
+                ->orWhere('content', 'like', '%' . $request->q . '%')
+                ->get();
+                return response()->json($search);
+            }
+            public function canvacreate(){
+                return Inertia::render('Tool/canvatool/Add');
+            }
+            public function canvastore(Request $request){
+                $data = ToolCanva::create([
+                    'name' => $request->name,
+                    'content' => $request->content
+                ]);
+                return 'sukses';
+            }
+            public function canvaedit($id){
+                $data = ToolCanva::find($id);
+                if ($data) {
+                    return Inertia::render('Tool/canvatool/Edit', ['dataedit'=>$data]);
+                    
+                }else{
+                    abort(404);
+                }
+        
+            }
+            public function canvaupdate(Request $request){
+                $data = ToolCanva::find($request->id)->update([
+                    'name' => $request->name,
+                    'content' => $request->content
+                ]);
+                return 'sukses';
+            }
+            public function canvadestroy(Request $request){
+                ToolCanva::destroy($request->id);
+            }
 }

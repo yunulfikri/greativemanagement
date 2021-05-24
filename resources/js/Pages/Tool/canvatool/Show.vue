@@ -1,13 +1,13 @@
 <template>
     <app-layout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Tool - Element Tag</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Tool - Canva Tag</h2>
         </template>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-3 min-h-screen">
                     <div class="flex justify-between">
-                        <a :href="route('tool.element.add')"
+                        <a :href="route('tool.canva.add')"
                             class="px-4 py-2 text-base tracking-wider text-white inline-flex items-center space-x-2 rounded hover:bg-blue-600 mb-5 mt-2 greative-bg-color">
                             <span>
                                 Add New
@@ -19,8 +19,8 @@
                             </span>
                         </a>
 
+
                         <div>
-                            
                             <div class="relative text-gray-600 my-2 focus-within:text-gray-400">
                                 <span class="absolute inset-y-0 left-0 flex items-center pl-2">
                                     <button type="submit" class="p-1 focus:outline-none focus:shadow-outline">
@@ -43,7 +43,7 @@
                             
                             <div class="py-2 align-middle inline-block w-full sm:px-6 lg:px-8">
                                 <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                    <table class="table-auto divide-y divide-gray-200 w-full">
+                                     <table class="table-auto divide-y divide-gray-200 w-full">
                                         <thead>
                                             <tr class="bg-gray-500">
                                                 <th class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">No</th>
@@ -64,7 +64,7 @@
                                                 </td>
                                                 <td class="px-3 py-4 whitespace-nowrap text-center capitalize">{{ moment(data.updated_at).format('LLL') }}</td>
                                                 <td class="whitespace-nowrap text-center">
-                                                    <a :href="route('tool.element.edit', data.id)" class="bg-yellow-400 text-black shadow px-2 py-1 rounded">
+                                                    <a :href="route('tool.canva.edit', data.id)" class="bg-yellow-400 text-black shadow px-2 py-1 rounded">
                                                         edit
                                                     </a>
                                                 </td>
@@ -106,7 +106,7 @@
                 if (val == '') {
                     this.tools = this.data
                 } else {
-                    axios.get(route('tool.element.search', this.search))
+                    axios.get(route('tool.canva.search', this.search))
                     .then(response => {
                         this.tools = response.data
                     }).catch(error => {
@@ -121,9 +121,6 @@
                     value = value.substring(0, (limit - 3)) + '...';
                 }
                 return value
-            },
-            ShowToast(){
-                console.log("tes")
             }
         }
     }

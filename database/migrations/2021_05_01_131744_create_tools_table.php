@@ -31,6 +31,12 @@ class CreateToolsTable extends Migration
             $table->text('content');
             $table->timestamps();
         });
+        Schema::create('canvatag', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->text('content');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -43,5 +49,6 @@ class CreateToolsTable extends Migration
         Schema::dropIfExists('cmtag');
         Schema::dropIfExists('etsytag');
         Schema::dropIfExists('elementtag');
+        Schema::dropIfExists('canvatag');
     }
 }

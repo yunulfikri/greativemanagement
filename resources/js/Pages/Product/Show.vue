@@ -17,11 +17,25 @@
                                 <path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" /></svg>
                         </span>
                     </a>
-                    </template>
-                <div class="flex justify-end">
-                    
+                </template>
+                <div class="flex justify-end my-2">
+                    <div class="mr-3">
+                        <select
+                            class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-2 px-4 pr-8 rounded"
+                            id="grid-state" v-model.lazy="category">
+                            <option value="all">All</option>
+                            <option value="Presentation">Presentation</option>
+                            <option value="Social Media Template">Social Media Template</option>
+                            <option value="Template">Template</option>
+                            <option value="Font">Font</option>
+                            <option value="Mockup">Mockup</option>
+                            <option value="Illustration">Illustration</option>
+                            <option value="Brochure & Flyer">Brochure & Flyer</option>
+                        </select>
+                    </div>
+
                     <div>
-                        <div class="relative text-gray-600 my-2 focus-within:text-gray-400">
+                        <div class="relative text-gray-600 focus-within:text-gray-400">
                             <span class="absolute inset-y-0 left-0 flex items-center pl-2">
                                 <button type="submit" class="p-1 focus:outline-none focus:shadow-outline">
                                     <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-6 h-6">
@@ -44,7 +58,9 @@
                                             <th class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">
                                                 No</th>
                                             <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">
-                                                Nama</th>
+                                                Name</th>
+                                            <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">
+                                                Category</th>
                                             <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">
                                                 Status</th>
                                             <th colspan="6" class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">
@@ -54,10 +70,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <template v-for="(data, index) in products" :key="data.id">
+                                        <template v-for="(data, index) in products.data" :key="data.id">
                                             <tr>
                                                 <td rowspan="4" class="py-4 whitespace-nowrap text-center border-b-2 border-gray-300">{{ index+1 }}</td>
-                                                <td rowspan="4" class="px-6 py-4 whitespace-nowrap text-center border-b-2 border-gray-300">{{ data.name }} </td>
+                                                <td rowspan="4" class="px-6 py-4 whitespace-normal text-center border-b-2 border-gray-300">{{ data.name }} </td>
+                                                <td rowspan="4" class="px-6 py-4 whitespace-nowrap text-center border-b-2 border-gray-300 capitalize">{{ data.category }}</td>
                                                 <td rowspan="4" class="px-6 py-4 whitespace-nowrap text-center border-b-2 border-gray-300 capitalize">
                                                     <template v-if="data.status == 'abort'">
                                                         <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-700 rounded">Abort</span>
@@ -81,9 +98,9 @@
                                                 <td class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider bg-gray-50">Design Bundles</td>
                                                 <td rowspan="4" class="px-6 py-4 whitespace-nowrap text-center border-b-2 border-gray-300">
                                                     <template v-if="$page.props.user.role == 'admin'">
-                                                    <a :href="route('product.edit', data.id)" class="text-center">
-                                                        <img height="20" width="20" :src="'img/settings.png'" alt="" srcset="">
-                                                    </a>
+                                                        <a :href="route('product.edit', data.id)" class="text-center">
+                                                            <img height="20" width="20" :src="'img/settings.png'" alt="" srcset="">
+                                                        </a>
                                                     </template>
                                                 </td>
                                             </tr>
@@ -91,11 +108,11 @@
                                                 <td class="px-6 py-4 whitespace-nowrap text-center">
                                                     <template v-if="data.CreativeMarket != null">
                                                         <a :href="data.CreativeMarket" target="_blank" style="text-align: -webkit-center">
-                                                        <div>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-</svg>
-                                                        </div>
+                                                            <div>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                </svg>
+                                                            </div>
                                                         </a>
                                                     </template>
                                                     <template v-else>
@@ -105,11 +122,11 @@
                                                 <td class="px-6 py-4 whitespace-nowrap text-center">
                                                     <template v-if="data.Website != null">
                                                         <a :href="data.Website" target="_blank" style="text-align: -webkit-center">
-                                                        <div>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-</svg>
-                                                        </div>
+                                                            <div>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                </svg>
+                                                            </div>
                                                         </a>
                                                     </template>
                                                     <template v-else>
@@ -119,11 +136,11 @@
                                                 <td class="px-6 py-4 whitespace-nowrap text-center">
                                                     <template v-if="data.Element != null">
                                                         <a :href="data.Element" target="_blank" style="text-align: -webkit-center">
-                                                        <div>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-</svg>
-                                                        </div>
+                                                            <div>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                </svg>
+                                                            </div>
                                                         </a>
                                                     </template>
                                                     <template v-else>
@@ -133,11 +150,11 @@
                                                 <td class="px-6 py-4 whitespace-nowrap text-center">
                                                     <template v-if="data.Canva != null">
                                                         <a :href="data.Canva" target="_blank" style="text-align: -webkit-center">
-                                                        <div>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-</svg>
-                                                        </div>
+                                                            <div>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                </svg>
+                                                            </div>
                                                         </a>
                                                     </template>
                                                     <template v-else>
@@ -147,11 +164,11 @@
                                                 <td class="px-6 py-4 whitespace-nowrap text-center">
                                                     <template v-if="data.Etsy != null">
                                                         <a :href="data.Etsy" target="_blank" style="text-align: -webkit-center">
-                                                        <div>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-</svg>
-                                                        </div>
+                                                            <div>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                </svg>
+                                                            </div>
                                                         </a>
                                                     </template>
                                                     <template v-else>
@@ -161,11 +178,11 @@
                                                 <td class="px-6 py-4 whitespace-nowrap text-center">
                                                     <template v-if="data.DesignBundles != null">
                                                         <a :href="data.DesignBundles" target="_blank" style="text-align: -webkit-center">
-                                                        <div>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-</svg>
-                                                        </div>
+                                                            <div>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                </svg>
+                                                            </div>
                                                         </a>
                                                     </template>
                                                     <template v-else>
@@ -185,11 +202,11 @@
                                                 <td class="px-6 py-4 whitespace-nowrap text-center border-b-2 border-gray-300">
                                                     <template v-if="data.Crella != null">
                                                         <a :href="data.Crella" target="_blank" style="text-align: -webkit-center">
-                                                        <div>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-</svg>
-                                                        </div>
+                                                            <div>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                </svg>
+                                                            </div>
                                                         </a>
                                                     </template>
                                                     <template v-else>
@@ -199,11 +216,11 @@
                                                 <td class="px-6 py-4 whitespace-nowrap text-center  border-b-2 border-gray-300">
                                                     <template v-if="data.TemplateMonster != null">
                                                         <a :href="data.TemplateMonster" target="_blank" style="text-align: -webkit-center">
-                                                        <div>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-</svg>
-                                                        </div>
+                                                            <div>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                </svg>
+                                                            </div>
                                                         </a>
                                                     </template>
                                                     <template v-else>
@@ -213,11 +230,11 @@
                                                 <td class="px-6 py-4 whitespace-nowrap text-center  border-b-2 border-gray-300">
                                                     <template v-if="data.Dafont != null">
                                                         <a :href="data.Dafont" target="_blank" style="text-align: -webkit-center">
-                                                        <div>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-</svg>
-                                                        </div>
+                                                            <div>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                </svg>
+                                                            </div>
                                                         </a>
                                                     </template>
                                                     <template v-else>
@@ -227,11 +244,11 @@
                                                 <td class="px-6 py-4 whitespace-nowrap text-center  border-b-2 border-gray-300">
                                                     <template v-if="data.TheHungryJPEG != null">
                                                         <a :href="data.TheHungryJPEG" target="_blank" style="text-align: -webkit-center">
-                                                        <div>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-</svg>
-                                                        </div>
+                                                            <div>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                </svg>
+                                                            </div>
                                                         </a>
                                                     </template>
                                                     <template v-else>
@@ -241,11 +258,11 @@
                                                 <td class="px-6 py-4 whitespace-nowrap text-center  border-b-2 border-gray-300">
                                                     <template v-if="data.FDR != null">
                                                         <a :href="data.FDR" target="_blank" style="text-align: -webkit-center">
-                                                        <div>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-</svg>
-                                                        </div>
+                                                            <div>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                </svg>
+                                                            </div>
                                                         </a>
                                                     </template>
                                                     <template v-else>
@@ -257,6 +274,8 @@
                                         </template>
                                     </tbody>
                                 </table>
+
+                                <pagination class="mt-6 mb-3 mr-3 float-right" :links="products.links" />
                             </div>
                         </div>
                     </div>
@@ -269,26 +288,45 @@
 
 <script>
 import AppLayout from "@/Layouts/AppLayout";
+import Pagination from '@/Components/Pagination';
 export default {
     data: function () {
         return {
             search: '',
+            category: 'all',
             products: this.data
         }
     },
     components: {
         AppLayout,
+        Pagination
     },
     props: ['data'],
     watch: {
         search: function (val) {
-            console.log(val)
+            // console.log(val)
             if (val == '') {
                 this.products = this.data
             } else {
                 axios.get(route('product.search', this.search))
                     .then(response => {
-                        console.log(response.data)
+                        // console.log(response.data)
+                        this.products = response.data
+                    }).catch(error => {
+                        console.log(error.message)
+
+                    })
+            }
+
+        },
+        category: function (val) {
+            // console.log(val)
+            if (val == 'all') {
+                this.products = this.data
+            } else {
+                axios.get(route('product.search.category', this.category))
+                    .then(response => {
+                        // console.log(response.data)
                         this.products = response.data
                     }).catch(error => {
                         console.log(error.message)

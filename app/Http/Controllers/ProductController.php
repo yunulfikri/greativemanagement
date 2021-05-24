@@ -15,7 +15,7 @@ class ProductController extends Controller
     public function index()
     {
         //
-        $data = Product::latest()->get();
+        $data = Product::latest()->paginate(10);
         return Inertia::render('Product/Show', ['data' => $data]);
     }
 
@@ -32,7 +32,12 @@ class ProductController extends Controller
     }
 
     public function search(Request $request){
-        $search = Product::where('name', 'like', '%' . $request->q . '%')->get();
+        $search = Product::where('name', 'like', '%' . $request->q . '%')->paginate(10);
+        return response()->json($search);
+    }
+
+    public function searchcategory(Request $request){
+        $search = Product::where('category', $request->q)->paginate(10);
         return response()->json($search);
     }
 
@@ -48,6 +53,7 @@ class ProductController extends Controller
         $product = Product::create([
             'name' => $request->name,
             'status' => $request->status,
+            'category' => $request->category,
             'CreativeMarket' => $request->Creativemarket,
             'Website' => $request->Website,
             'Element' => $request->Element,
@@ -105,6 +111,7 @@ class ProductController extends Controller
         $product = Product::find($request->id)->update([
             'name' => $request->name,
             'status' => $request->status,
+            'category' => $request->category,
             'CreativeMarket' => $request->Creativemarket,
             'Website' => $request->Website,
             'Element' => $request->Element,

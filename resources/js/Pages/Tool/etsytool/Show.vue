@@ -43,12 +43,13 @@
                             
                             <div class="py-2 align-middle inline-block w-full sm:px-6 lg:px-8">
                                 <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                    <table class="table-auto divide-y divide-gray-200 w-full">
+                                     <table class="table-auto divide-y divide-gray-200 w-full">
                                         <thead>
                                             <tr class="bg-gray-500">
                                                 <th class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">No</th>
                                                 <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Name</th>
                                                 <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Content</th>
+                                                <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Clipboard</th>
                                                 <th class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Updated At</th>
                                                 <th class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Edit</th>
                                             </tr>
@@ -57,10 +58,13 @@
                                             <tr v-for="(data, index) in tools" :key="data.id">
                                                 <td class="px-3 py-4 whitespace-nowrap text-center">{{ index+1 }}</td>
                                                 <td class="px-6 py-4 text-center">{{ data.name }}</td>
-                                                <td class="px-6 py-4 capitalize max-w-xs">{{ data.content }}</td>
+                                                <td class="px-6 py-4 max-w-xs">{{ data.content }}</td>
+                                                <td class="px-6 py-4 text-center">
+                                                    <button class="p-1 bg-green-500 text-sm rounded btn" :data-clipboard-text="data.content">Copy</button>
+                                                </td>
                                                 <td class="px-3 py-4 whitespace-nowrap text-center capitalize">{{ moment(data.updated_at).format('LLL') }}</td>
                                                 <td class="whitespace-nowrap text-center">
-                                                    <a :href="route('tool.etsy.edit', data.id)" class="bg-yellow-400 text-black shadow px-2 py-1 rounded">
+                                                    <a :href="route('tool.element.edit', data.id)" class="bg-yellow-400 text-black shadow px-2 py-1 rounded">
                                                         edit
                                                     </a>
                                                 </td>
@@ -79,6 +83,9 @@
 <script>
     import AppLayout from "@/Layouts/AppLayout";
     import moment from 'moment';
+    import ClipboardJS from 'clipboard';
+
+    new ClipboardJS('.btn');
     export default {
         data: function () {
             return {

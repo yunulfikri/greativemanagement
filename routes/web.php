@@ -39,6 +39,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/product/store', 'ProductController@store')->name('product.store');
     Route::post('/product/destroy', 'ProductController@destroy')->name('product.destroy');
     Route::get('/product/search/{q}', 'ProductController@search')->name('product.search');
+    Route::get('/product/search/{q}/category', 'ProductController@searchcategory')->name('product.search.category');
+
 
 
     Route::get('/guide', 'GuideController@index')->name('guide');
@@ -102,6 +104,17 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/tool/element/destroy', 'ToolController@elementdestroy')->name('tool.element.destroy');
     Route::get('/tool/element/{id}/edit', 'ToolController@elementedit')->name('tool.element.edit');
     Route::get('/tool/element/search/{q}', 'ToolController@elementsearch')->name('tool.element.search');
+
+
+    Route::get('/tool/canva', 'ToolController@canvaindex')->name('tool.canva');
+    Route::get('/tool/canva/add', 'ToolController@canvacreate')->name('tool.canva.add');
+    Route::post('/tool/canva/store', 'ToolController@canvastore')->name('tool.canva.store');
+    Route::post('/tool/canva/update', 'ToolController@canvaupdate')->name('tool.canva.update');
+    Route::post('/tool/canva/destroy', 'ToolController@canvadestroy')->name('tool.canva.destroy');
+    Route::get('/tool/canva/{id}/edit', 'ToolController@canvaedit')->name('tool.canva.edit');
+    Route::get('/tool/canva/search/{q}', 'ToolController@canvasearch')->name('tool.canva.search');
+
+    
 
     Route::get('/accounts/settings', 'AccountController@index')->name('account');
     Route::post('/accounts/store', 'AccountController@store')->name('account.store');

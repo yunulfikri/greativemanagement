@@ -24,7 +24,7 @@
                                 Product
                             </jet-nav-link>
                             <jet-nav-link :href="route('guide')" :active="route().current('guide')">
-                                Preview Guide
+                                Preview Description
                             </jet-nav-link>
                             <jet-nav-link :href="route('brief')" :active="route().current('brief')">
                                 Project Brief

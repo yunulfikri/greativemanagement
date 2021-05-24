@@ -4,8 +4,10 @@ require('./bootstrap');
 import { createApp, h } from 'vue';
 import { App as InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
-
+import VueSweetalert2 from 'vue-sweetalert2';
 const el = document.getElementById('app');
+
+
 
 createApp({
     render: () =>
@@ -16,6 +18,7 @@ createApp({
 })
     .mixin({ methods: { route } })
     .use(InertiaPlugin)
+    .use(VueSweetalert2)
     .mount(el);
 
 InertiaProgress.init({ color: '#4B5563' });
