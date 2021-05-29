@@ -6,15 +6,29 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\FreepikTask;
 use App\Models\User;
+use Auth;
 
 class FreepikTaskController extends Controller
 {
     //
     public function index(){
-        $data = FreepikTask::select('freepik_tasks.*', 'users.name as membername')
-        ->join('users', 'users.id', '=', 'freepik_tasks.member_id')
-        ->latest()->get();
-        return Inertia::render('Task/Show',['data' => $data]);
+        $user = Auth::user();
+        if ($user->role == 'admin') {
+            # code... for admin
+            $data = FreepikTask::select('freepik_tasks.*', 'users.name as membername')
+            ->join('users', 'users.id', '=', 'freepik_tasks.member_id')
+            ->latest()->get();
+            return Inertia::render('Task/Show',['data' => $data]);
+        } else {
+            # code... member
+            $data = FreepikTask::select('freepik_tasks.*', 'users.name as membername')
+            ->where('freepik_tasks.member_id', $user->id)
+            ->join('users', 'users.id', '=', 'freepik_tasks.member_id')
+            ->latest()->get();
+            return Inertia::render('Task/Show',['data' => $data]);
+        }
+        
+        
     }
     public function search(Request $request){
         $data = FreepikTask::select('freepik_tasks.*', 'users.name as membername')
