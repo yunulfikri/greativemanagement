@@ -156,6 +156,35 @@
                     <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                         Dashboard
                     </jet-responsive-nav-link>
+                    <jet-responsive-nav-link :href="route('product')" :active="route().current('product')">
+                                Product
+                            </jet-responsive-nav-link>
+                            <jet-responsive-nav-link :href="route('guide')" :active="route().current('guide')">
+                                Preview Description
+                            </jet-responsive-nav-link>
+                            <jet-responsive-nav-link :href="route('brief')" :active="route().current('brief')">
+                                Project Brief
+                            </jet-responsive-nav-link>
+                            <template v-if="role == 'member'">
+                                <jet-responsive-nav-link v-if="current_team_id == 1" :href="route('task')" :active="route().current('task')">
+                                    Freepik Task
+                                </jet-responsive-nav-link>
+                            </template>
+                            <template v-else>
+                                <jet-responsive-nav-link :href="route('task')" :active="route().current('task')">
+                                    Freepik Task
+                                </jet-responsive-nav-link>
+                                <jet-responsive-nav-link :href="route('account')" :active="route().current('account')">
+                                    Account Member
+                                </jet-responsive-nav-link>
+                                <!-- <jet-responsive-nav-link :href="route('plan')" :active="route().current('plan')">
+                                        Plan
+                                </jet-responsive-nav-link> -->
+                                <jet-responsive-nav-link :href="route('tool')" :active="route().current('tool')">
+                                        Tools
+                                </jet-responsive-nav-link>
+                            </template>
+
                 </div>
 
                 <!-- Responsive Settings Options -->
