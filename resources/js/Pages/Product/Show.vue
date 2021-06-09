@@ -3,6 +3,9 @@
     <template #header>
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">Product Marketplace</h2>
     </template>
+    <loading v-model:active="isLoading"
+                 :can-cancel="false"
+                 :is-full-page="fullPage"/>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -74,7 +77,7 @@
                                             <tr>
                                                 <td rowspan="4" class="py-4 whitespace-nowrap text-center border-b-2 border-gray-300">{{ index+1 }}</td>
                                                 <td rowspan="4" class="px-6 py-4 whitespace-normal text-center border-b-2 border-gray-300">{{ data.name }} </td>
-                                                <td rowspan="4" class="px-6 py-4 whitespace-nowrap text-center border-b-2 border-gray-300 capitalize">{{ data.category }}</td>
+                                                <td rowspan="4" class="px-6 py-4 whitespace-normal text-center border-b-2 border-gray-300 capitalize">{{ data.category }}</td>
                                                 <td rowspan="4" class="px-6 py-4 whitespace-nowrap text-center border-b-2 border-gray-300 capitalize">
                                                     <template v-if="data.status == 'abort'">
                                                         <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-700 rounded">Abort</span>
@@ -106,88 +109,34 @@
                                             </tr>
                                             <tr>
                                                 <td class="px-6 py-4 whitespace-nowrap text-center">
-                                                    <template v-if="data.CreativeMarket != null">
-                                                        <a :href="data.CreativeMarket" target="_blank" style="text-align: -webkit-center">
-                                                            <div>
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                                </svg>
-                                                            </div>
-                                                        </a>
-                                                    </template>
-                                                    <template v-else>
-                                                        <input type="checkbox" disabled class="appearance-none bg-gray-500 checked:border-transparent">
-                                                    </template>
+                                                    <div>
+                                                        <input type="checkbox" name="CreativeMarket" :checked="data.CreativeMarket == 'true'" v-on:change="quickupdate($event,data.id)">
+                                                    </div>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-center">
-                                                    <template v-if="data.Website != null">
-                                                        <a :href="data.Website" target="_blank" style="text-align: -webkit-center">
-                                                            <div>
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                                </svg>
-                                                            </div>
-                                                        </a>
-                                                    </template>
-                                                    <template v-else>
-                                                        <input type="checkbox" disabled class="appearance-none bg-gray-500 checked:border-transparent">
-                                                    </template>
+                                                    <div>
+                                                        <input type="checkbox" name="Website" :checked="data.Website == 'true'" v-on:change="quickupdate($event,data.id)">
+                                                    </div>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-center">
-                                                    <template v-if="data.Element != null">
-                                                        <a :href="data.Element" target="_blank" style="text-align: -webkit-center">
-                                                            <div>
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                                </svg>
-                                                            </div>
-                                                        </a>
-                                                    </template>
-                                                    <template v-else>
-                                                        <input type="checkbox" disabled class="appearance-none bg-gray-500 checked:border-transparent">
-                                                    </template>
+                                                    <div>
+                                                        <input type="checkbox" name="Element" :checked="data.Element == 'true'" v-on:change="quickupdate($event,data.id)">
+                                                    </div>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-center">
-                                                    <template v-if="data.Canva != null">
-                                                        <a :href="data.Canva" target="_blank" style="text-align: -webkit-center">
-                                                            <div>
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                                </svg>
-                                                            </div>
-                                                        </a>
-                                                    </template>
-                                                    <template v-else>
-                                                        <input type="checkbox" disabled class="appearance-none bg-gray-500 checked:border-transparent">
-                                                    </template>
+                                                    <div>
+                                                        <input type="checkbox" name="Canva" :checked="data.Canva == 'true'" v-on:change="quickupdate($event,data.id)">
+                                                    </div>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-center">
-                                                    <template v-if="data.Etsy != null">
-                                                        <a :href="data.Etsy" target="_blank" style="text-align: -webkit-center">
-                                                            <div>
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                                </svg>
-                                                            </div>
-                                                        </a>
-                                                    </template>
-                                                    <template v-else>
-                                                        <input type="checkbox" disabled class="appearance-none bg-gray-500 checked:border-transparent">
-                                                    </template>
+                                                    <div>
+                                                        <input type="checkbox" name="Etsy" :checked="data.Etsy == 'true'" v-on:change="quickupdate($event,data.id)">
+                                                    </div>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-center">
-                                                    <template v-if="data.DesignBundles != null">
-                                                        <a :href="data.DesignBundles" target="_blank" style="text-align: -webkit-center">
-                                                            <div>
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                                </svg>
-                                                            </div>
-                                                        </a>
-                                                    </template>
-                                                    <template v-else>
-                                                        <input type="checkbox" disabled class="appearance-none bg-gray-500 checked:border-transparent">
-                                                    </template>
+                                                    <div>
+                                                        <input type="checkbox" name="DesignBundles" :checked="data.DesignBundles == 'true'" v-on:change="quickupdate($event,data.id)">
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -200,74 +149,29 @@
                                             </tr>
                                             <tr>
                                                 <td class="px-6 py-4 whitespace-nowrap text-center border-b-2 border-gray-300">
-                                                    <template v-if="data.Crella != null">
-                                                        <a :href="data.Crella" target="_blank" style="text-align: -webkit-center">
-                                                            <div>
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                                </svg>
-                                                            </div>
-                                                        </a>
-                                                    </template>
-                                                    <template v-else>
-                                                        <input type="checkbox" disabled class="appearance-none bg-gray-500 checked:border-transparent">
-                                                    </template>
+                                                    <div>
+                                                        <input type="checkbox" name="Crella" :checked="data.Crella == 'true'" v-on:change="quickupdate($event,data.id)">
+                                                    </div>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-center  border-b-2 border-gray-300">
-                                                    <template v-if="data.TemplateMonster != null">
-                                                        <a :href="data.TemplateMonster" target="_blank" style="text-align: -webkit-center">
-                                                            <div>
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                                </svg>
-                                                            </div>
-                                                        </a>
-                                                    </template>
-                                                    <template v-else>
-                                                        <input type="checkbox" disabled class="appearance-none bg-gray-500 checked:border-transparent">
-                                                    </template>
+                                                    <div>
+                                                        <input type="checkbox" name="TemplateMonster" :checked="data.TemplateMonster == 'true'" v-on:change="quickupdate($event,data.id)">
+                                                    </div>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-center  border-b-2 border-gray-300">
-                                                    <template v-if="data.Dafont != null">
-                                                        <a :href="data.Dafont" target="_blank" style="text-align: -webkit-center">
-                                                            <div>
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                                </svg>
-                                                            </div>
-                                                        </a>
-                                                    </template>
-                                                    <template v-else>
-                                                        <input type="checkbox" disabled class="appearance-none bg-gray-500 checked:border-transparent">
-                                                    </template>
+                                                    <div>
+                                                        <input type="checkbox" name="Dafont" :checked="data.Dafont == 'true'" v-on:change="quickupdate($event,data.id)">
+                                                    </div>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-center  border-b-2 border-gray-300">
-                                                    <template v-if="data.TheHungryJPEG != null">
-                                                        <a :href="data.TheHungryJPEG" target="_blank" style="text-align: -webkit-center">
-                                                            <div>
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                                </svg>
-                                                            </div>
-                                                        </a>
-                                                    </template>
-                                                    <template v-else>
-                                                        <input type="checkbox" disabled class="appearance-none bg-gray-500 checked:border-transparent">
-                                                    </template>
+                                                    <div>
+                                                        <input type="checkbox" name="TheHungryJPEG" :checked="data.TheHungryJPEG == 'true'" v-on:change="quickupdate($event,data.id)">
+                                                    </div>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-center  border-b-2 border-gray-300">
-                                                    <template v-if="data.FDR != null">
-                                                        <a :href="data.FDR" target="_blank" style="text-align: -webkit-center">
-                                                            <div>
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                                </svg>
-                                                            </div>
-                                                        </a>
-                                                    </template>
-                                                    <template v-else>
-                                                        <input type="checkbox" disabled class="appearance-none bg-gray-500 checked:border-transparent">
-                                                    </template>
+                                                    <div>
+                                                        <input type="checkbox" name="FDR" :checked="data.FDR == 'true'" v-on:change="quickupdate($event,data.id)">
+                                                    </div>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-center  border-b-2 border-gray-300"></td>
                                             </tr>
@@ -289,9 +193,13 @@
 <script>
 import AppLayout from "@/Layouts/AppLayout";
 import Pagination from '@/Components/Pagination';
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 export default {
     data: function () {
         return {
+            isLoading: false,
+            fullPage: true,
             search: '',
             category: 'all',
             products: this.data
@@ -299,19 +207,38 @@ export default {
     },
     components: {
         AppLayout,
-        Pagination
+        Pagination,
+        Loading
     },
     props: ['data'],
+    methods:{
+        quickupdate(event,id){
+            this.isLoading = true
+            axios.post(route('product.quickupdate'),{
+                'id':id,
+                'market': event.target.name,
+                'value': event.target.checked ? 'true':'false'
+            }).then(response => {
+                if (response.data == 'sukses') {
+                    this.isLoading = false   
+                }
+            }).catch(error => {
+                alert(error.message)
+            })
+        }
+    },
     watch: {
         search: function (val) {
             // console.log(val)
             if (val == '') {
                 this.products = this.data
             } else {
+                this.isLoading = true
                 axios.get(route('product.search', this.search))
                     .then(response => {
                         // console.log(response.data)
                         this.products = response.data
+                        this.isLoading = false
                     }).catch(error => {
                         console.log(error.message)
 

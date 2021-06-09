@@ -64,4 +64,19 @@ class FreepikTaskController extends Controller
         $destroy = FreepikTask::destroy($request->id);
         return $destroy;
     }
+
+
+    public function quickUpdate(Request $request){
+        FreepikTask::find($request->id)->update([
+            'status' => 'done'
+        ]);
+        return 'sukses';
+    }
+
+
+    public function searchcategory(Request $request){
+        $search = FreepikTask::where('status', $request->q)->get();
+        
+        return response()->json($search);
+    }
 }

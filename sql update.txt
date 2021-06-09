@@ -1,0 +1,25 @@
+UPDATE `product_market` SET `CreativeMarket`='true' WHERE `CreativeMarket` IS NOT NULL;
+UPDATE `product_market` SET `Website`='true' WHERE `Website` IS NOT NULL;
+UPDATE `product_market` SET `Element`='true' WHERE `Element` IS NOT NULL;
+UPDATE `product_market` SET `Canva`='true' WHERE `Canva` IS NOT NULL;
+UPDATE `product_market` SET `Etsy`='true' WHERE `Etsy` IS NOT NULL;
+UPDATE `product_market` SET `DesignBundles`='true' WHERE `DesignBundles` IS NOT NULL;
+UPDATE `product_market` SET `Crella`='true' WHERE `Crella` IS NOT NULL;
+UPDATE `product_market` SET `TemplateMonster`='true' WHERE `TemplateMonster` IS NOT NULL;
+UPDATE `product_market` SET `Dafont`='true' WHERE `Dafont` IS NOT NULL;
+UPDATE `product_market` SET `TheHungryJPEG`='true' WHERE `TheHungryJPEG` IS NOT NULL;
+UPDATE `product_market` SET `FDR`='true' WHERE `FDR` IS NOT NULL;
+
+
+
+UPDATE `product_market` SET `CreativeMarket`='false' WHERE `CreativeMarket` IS NULL;
+UPDATE `product_market` SET `Website`='false' WHERE `Website` IS NULL;
+UPDATE `product_market` SET `Element`='false' WHERE `Element` IS NULL;
+UPDATE `product_market` SET `Canva`='false' WHERE `Canva` IS NULL;
+UPDATE `product_market` SET `Etsy`='false' WHERE `Etsy` IS NULL;
+UPDATE `product_market` SET `DesignBundles`='false' WHERE `DesignBundles` IS NULL;
+UPDATE `product_market` SET `Crella`='false' WHERE `Crella` IS NULL;
+UPDATE `product_market` SET `TemplateMonster`='false' WHERE `TemplateMonster` IS NULL;
+UPDATE `product_market` SET `Dafont`='false' WHERE `Dafont` IS NULL;
+UPDATE `product_market` SET `TheHungryJPEG`='false' WHERE `TheHungryJPEG` IS NULL;
+UPDATE `product_market` SET `FDR`='false' WHERE `FDR` IS NULL;

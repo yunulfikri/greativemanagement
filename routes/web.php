@@ -40,6 +40,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/product/destroy', 'ProductController@destroy')->name('product.destroy');
     Route::get('/product/search/{q}', 'ProductController@search')->name('product.search');
     Route::get('/product/search/{q}/category', 'ProductController@searchcategory')->name('product.search.category');
+    Route::post('/product/quickupdate', 'ProductController@quickupdate')->name('product.quickupdate');
+
 
 
 
@@ -67,6 +69,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/task/update', 'FreepikTaskController@update')->name('task.update');
     Route::post('/task/destroy', 'FreepikTaskController@destroy')->name('task.destroy');
     Route::get('/task/search/{q}', 'FreepikTaskController@search')->name('task.search');
+    Route::get('/task/search/{q}/category', 'FreepikTaskController@searchcategory')->name('task.search.category');
+    Route::post('/task/quickupdate', 'FreepikTaskController@quickUpdate')->name('task.quickupdate');
+
 
 
     Route::get('/product-desc', 'PlanController@index')->name('plan');

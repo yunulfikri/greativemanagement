@@ -41,6 +41,13 @@ class ProductController extends Controller
         return response()->json($search);
     }
 
+    public function quickupdate(Request $request){
+        Product::find($request->id)->update([
+            $request->market => $request->value
+        ]);
+        return 'sukses';
+    }
+
     /**
      * Store a newly created resource in storage.
      *

@@ -18,9 +18,19 @@
                     </a>
                 </template>
                 <a :href="route('file.upload')" class="px-4 py-2 text-base tracking-wider text-white inline-flex items-center space-x-2 rounded hover:bg-blue-600 mb-5 mt-2 mx-5 greative-bg-color">Upload File</a>
-                <div class="flex justify-end">
+                <div class="flex justify-end my-2">
+                    <div class="mr-3">
+                        <select
+                            class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-1.5 px-4 pr-8 rounded"
+                            id="grid-state" v-model.lazy="status">
+                            <option value="new">New</option>
+                            <option value="done">Done</option>
+                            <option value="all">All</option>
+                            
+                        </select>
+                    </div>
                     <div>
-                        <div class="relative text-gray-600 my-2 focus-within:text-gray-400">
+                        <div class="relative text-gray-600 focus-within:text-gray-400">
                             <span class="absolute inset-y-0 left-0 flex items-center pl-2">
                                 <button type="submit" class="p-1 focus:outline-none focus:shadow-outline">
                                     <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-6 h-6">
@@ -47,6 +57,9 @@
                                             <th class="px-6 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Deadline</th>
                                             <th class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Member</th>
                                             <th class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Status</th>
+                                            <template v-if="$page.props.user.role == 'admin'">
+                                            <th class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Update Status</th>
+                                            </template>
                                             <template v-if="$page.props.user.role == 'admin'">
                                                 <th class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Edit</th>
                                             </template>
@@ -75,6 +88,15 @@
                                                 </template>
                                                 <template v-else>{{ data.status }}</template>
                                             </td>
+                                            <template v-if="$page.props.user.role == 'admin'">
+                                            <td class="px-3 py-4 whitespace-nowrap text-center capitalize">
+                                                <template v-if="data.status == 'new'">
+                                                    <span class="inline-flex items-center justify-center text-xs font-bold leading-none ">
+                                                        <a class="border-none text-white bg-yellow-600 px-2 py-1 rounded" href="#" v-on:click="statusUpdateDone(data.id)">update</a>
+                                                    </span>
+                                                </template>
+                                            </td>
+                                            </template>
                                             <td class="whitespace-nowrap text-center">
                                                 <template v-if="$page.props.user.role == 'admin'">
                                                     <a :href="route('task.edit', data.id)" class="bg-yellow-400 text-black shadow px-2 py-1 rounded">
@@ -101,7 +123,8 @@ export default {
     data: function () {
         return {
             search: '',
-            task: this.data
+            task: this.data,
+            status: 'all'
         }
     },
     props: ['data'],
@@ -120,6 +143,35 @@ export default {
                         console.log(error.message)
                     })
             }
+        },
+        status: function (val) {
+            // console.log(val)
+            if (val == 'all') {
+                this.task = this.data
+            } else {
+                axios.get(route('task.search.category', this.status))
+                    .then(response => {
+                        console.log(response.data)
+                        this.task = response.data
+                    }).catch(error => {
+                        console.log(error.message)
+
+                    })
+            }
+
+        }
+    },
+    methods:{
+        statusUpdateDone(id){
+            axios.post(route('task.quickupdate', {
+                'id': id
+            })).then(response => {
+                if (response.data == 'sukses'){
+                    window.location.href = route('task')
+                }
+            }).catch(error => {
+                console.log(error.message)
+            })
         }
     }
 }

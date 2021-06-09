@@ -95,7 +95,7 @@
                     ref: '',
                     deadline: '',
                     quantity: '',
-                    status: ''
+                    status: 'new'
                 }
             }
         },
@@ -123,7 +123,7 @@
                     ref: '',
                     deadline: '',
                     quantity: '',
-                    status: ''
+                    status: 'new'
                 }
 
             }
