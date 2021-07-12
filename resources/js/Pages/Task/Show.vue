@@ -78,7 +78,7 @@
                                                 <template v-if="data.status == 'abort'">
                                                     <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-700 rounded">Abort</span>
                                                 </template>
-                                                <template v-else-if="data.status == 'pending'">
+                                                <template v-else-if="data.status == 'revision'">
                                                     <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-yellow-500 rounded">{{ data.status }}</span>
                                                 </template>
                                                 <template v-else-if="data.status == 'done'">

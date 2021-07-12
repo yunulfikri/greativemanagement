@@ -63,7 +63,7 @@
                                 class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded"
                                 id="grid-state" v-model="formTask.status" required>
                                 <option value="done">Done</option>
-                                <option value="pending">Pending</option>
+                                <option value="revision">Revision</option>
                                 <option value="new">New</option>
                                 <option value="abort">Abort</option>
                             </select>

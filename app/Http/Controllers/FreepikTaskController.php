@@ -34,6 +34,7 @@ class FreepikTaskController extends Controller
         $data = FreepikTask::select('freepik_tasks.*', 'users.name as membername')
         ->join('users', 'users.id', '=', 'freepik_tasks.member_id')
         ->where('freepik_tasks.name','like', '%' . $request->q . '%')
+        ->orWhere('users.name ','like', '%' . $request->q . '%')
         ->latest()->get();
         return response()->json($data);
     }
