@@ -163,7 +163,7 @@ class ToolController extends Controller
                 return Inertia::render('Tool/canvatool/Show', ['data'=>$data]);
             }
             public function canvasearch(Request $request){
-                $search = ToolElement::where('name', 'like', '%' . $request->q . '%')
+                $search = ToolCanva::where('name', 'like', '%' . $request->q . '%')
                 ->orWhere('content', 'like', '%' . $request->q . '%')
                 ->get();
                 return response()->json($search);

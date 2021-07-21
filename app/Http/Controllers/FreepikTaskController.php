@@ -85,7 +85,10 @@ class FreepikTaskController extends Controller
         FreepikTask::find($request->id)->update([
             'status' => 'done'
         ]);
-        return 'sukses';
+        $data = FreepikTask::select('freepik_tasks.*', 'users.name as membername')
+            ->join('users', 'users.id', '=', 'freepik_tasks.member_id')
+            ->latest()->get();
+        return response()->json($data);
     }
 
 

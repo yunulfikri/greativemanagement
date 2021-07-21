@@ -3,6 +3,9 @@
     <template #header>
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">Freepik</h2>
     </template>
+    <loading v-model:active="isLoading"
+                 :can-cancel="false"
+                 :is-full-page="fullPage"/>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-3 min-h-screen">
@@ -93,7 +96,7 @@
                                             <td class="px-3 py-4 whitespace-nowrap text-center capitalize">
                                                 <template v-if="data.status == 'new'">
                                                     <span class="inline-flex items-center justify-center text-xs font-bold leading-none ">
-                                                        <a class="border-none text-white bg-yellow-600 px-2 py-1 rounded" href="#" v-on:click="statusUpdateDone(data.id)">update</a>
+                                                        <button class="border-none text-white bg-yellow-600 px-2 py-1 rounded" v-on:click="statusUpdateDone(data.id)">update</button>
                                                     </span>
                                                 </template>
                                             </td>
@@ -121,18 +124,23 @@
 
 <script>
 import AppLayout from "@/Layouts/AppLayout";
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 export default {
     data: function () {
         return {
             search: '',
             task: this.data,
-            status: 'all'
+            status: 'all',
+            isLoading: false,
         }
     },
     props: ['data'],
     components: {
         AppLayout,
+        Loading
     },
+
     watch: {
         search: function (val) {
             if (val == '') {
@@ -165,14 +173,16 @@ export default {
     },
     methods:{
         statusUpdateDone(id){
+            this.isLoading = true
             axios.post(route('task.quickupdate', {
                 'id': id
             })).then(response => {
-                if (response.data == 'sukses'){
-                    window.location.href = route('task')
-                }
+                this.isLoading = false
+                this.task = response.data
+                
             }).catch(error => {
                 console.log(error.message)
+                alert(error.message)
             })
         }
     }

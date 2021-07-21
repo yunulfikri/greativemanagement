@@ -4,7 +4,7 @@
         <div class="flex justify-between">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Add New</h2>
             <div class="text-right">
-                <a :href="route('tool.canva')" class="bg-red-500 text-white rounded py-2 px-3">Back</a>
+                <a :href="route('tool.templatemonster')" class="bg-red-500 text-white rounded py-2 px-3">Back</a>
             </div>
         </div>
     </template>
@@ -60,22 +60,22 @@ export default {
     props:['dataedit'],
     methods: {
         saveTool() {
-            axios.post(route('tool.canva.update'), this.formTool)
+            axios.post(route('tool.templatemonster.update'), this.formTool)
                 .then(response => {
                     console.log(response.data)
                     this.reset()
-                    window.location.href = route('tool.canva')
+                    window.location.href = route('tool.templatemonster')
                 }).catch(error => {
                     console.log(error)
                     alert('gagal menyimpan, periksa kembali')
                 })
         },
         destroy(){
-            axios.post(route('tool.canva.destroy'), this.formTool)
+            axios.post(route('tool.templatemonster.destroy'), this.formTool)
                 .then(response => {
                     console.log(response.data)
                     this.reset()
-                    window.location.href = route('tool.canva')
+                    window.location.href = route('tool.templatemonster')
                 }).catch(error => {
                     console.log(error)
                     alert('gagal menyimpan, periksa kembali')

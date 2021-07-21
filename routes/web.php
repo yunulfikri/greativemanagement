@@ -119,7 +119,38 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/tool/canva/{id}/edit', 'ToolController@canvaedit')->name('tool.canva.edit');
     Route::get('/tool/canva/search/{q}', 'ToolController@canvasearch')->name('tool.canva.search');
 
-    
+    Route::get('/tool/crella', 'ToolCrellaController@crellaindex')->name('tool.crella');
+    Route::get('/tool/crella/add', 'ToolCrellaController@crellacreate')->name('tool.crella.add');
+    Route::post('/tool/crella/store', 'ToolCrellaController@crellastore')->name('tool.crella.store');
+    Route::post('/tool/crella/update', 'ToolCrellaController@crellaupdate')->name('tool.crella.update');
+    Route::post('/tool/crella/destroy', 'ToolCrellaController@crelladestroy')->name('tool.crella.destroy');
+    Route::get('/tool/crella/{id}/edit', 'ToolCrellaController@crellaedit')->name('tool.crella.edit');
+    Route::get('/tool/crella/search/{q}', 'ToolCrellaController@crellasearch')->name('tool.crella.search');
+
+    Route::get('/tool/fabrica', 'ToolCFabricaController@fabricaindex')->name('tool.fabrica');
+    Route::get('/tool/fabrica/add', 'ToolCFabricaController@fabricacreate')->name('tool.fabrica.add');
+    Route::post('/tool/fabrica/store', 'ToolCFabricaController@fabricastore')->name('tool.fabrica.store');
+    Route::post('/tool/fabrica/update', 'ToolCFabricaController@fabricaupdate')->name('tool.fabrica.update');
+    Route::post('/tool/fabrica/destroy', 'ToolCFabricaController@fabricadestroy')->name('tool.fabrica.destroy');
+    Route::get('/tool/fabrica/{id}/edit', 'ToolCFabricaController@fabricaedit')->name('tool.fabrica.edit');
+    Route::get('/tool/fabrica/search/{q}', 'ToolCFabricaController@fabricasearch')->name('tool.fabrica.search');
+
+    Route::get('/tool/templatemonster', 'ToolTMonsterController@templatemonsterindex')->name('tool.templatemonster');
+    Route::get('/tool/templatemonster/add', 'ToolTMonsterController@templatemonstercreate')->name('tool.templatemonster.add');
+    Route::post('/tool/templatemonster/store', 'ToolTMonsterController@templatemonsterstore')->name('tool.templatemonster.store');
+    Route::post('/tool/templatemonster/update', 'ToolTMonsterController@templatemonsterupdate')->name('tool.templatemonster.update');
+    Route::post('/tool/templatemonster/destroy', 'ToolTMonsterController@templatemonsterdestroy')->name('tool.templatemonster.destroy');
+    Route::get('/tool/templatemonster/{id}/edit', 'ToolTMonsterController@templatemonsteredit')->name('tool.templatemonster.edit');
+    Route::get('/tool/templatemonster/search/{q}', 'ToolTMonsterController@templatemonstersearch')->name('tool.templatemonster.search');
+
+    Route::get('/tool/designbundles', 'ToolDBundlesController@designbundlesindex')->name('tool.designbundles');
+    Route::get('/tool/designbundles/add', 'ToolDBundlesController@designbundlescreate')->name('tool.designbundles.add');
+    Route::post('/tool/designbundles/store', 'ToolDBundlesController@designbundlesstore')->name('tool.designbundles.store');
+    Route::post('/tool/designbundles/update', 'ToolDBundlesController@designbundlesupdate')->name('tool.designbundles.update');
+    Route::post('/tool/designbundles/destroy', 'ToolDBundlesController@designbundlesdestroy')->name('tool.designbundles.destroy');
+    Route::get('/tool/designbundles/{id}/edit', 'ToolDBundlesController@designbundlesedit')->name('tool.designbundles.edit');
+    Route::get('/tool/designbundles/search/{q}', 'ToolDBundlesController@designbundlessearch')->name('tool.designbundles.search');
+
 
     Route::get('/accounts/settings', 'AccountController@index')->name('account');
     Route::post('/accounts/store', 'AccountController@store')->name('account.store');
