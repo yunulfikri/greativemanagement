@@ -14,10 +14,10 @@
                         <a :href="route('tool.element')"><div class="rounded-full h-40 w-40 bg-green-500 flex items-center justify-center elementsvg"></div></a>
                         <a :href="route('tool.etsy')"><div class="rounded-full h-40 w-40 bg-yellow-400 flex items-center justify-center etsysvg"></div></a>
                         <a :href="route('tool.canva')"><div class="rounded-full h-40 w-40 bg-white flex items-center justify-center canvasvg"></div></a>
-                        <a :href="route('tool.crella')"><div class="rounded-full h-40 w-40 bg-blue-500 flex items-center justify-center text-white">Crella</div></a>
-                        <a :href="route('tool.templatemonster')"><div class="rounded-full h-40 w-40 bg-red-500 flex items-center justify-center text-white">Template Monster</div></a>
-                        <a :href="route('tool.designbundles')"><div class="rounded-full h-40 w-40 bg-green-500 flex items-center justify-center text-white">Design Bundles</div></a>
-                        <a :href="route('tool.fabrica')"><div class="rounded-full h-40 w-40 bg-purple-500 flex items-center justify-center text-white">Creative Fabrica</div></a>
+                        <a :href="route('tool.crella')"><div class="rounded-full h-40 w-40 bg-blue-500 flex items-center justify-center text-white crellasvg"></div></a>
+                        <a :href="route('tool.templatemonster')"><div class="rounded-full h-40 w-40 bg-red-500 flex items-center justify-center text-white monstersvg"></div></a>
+                        <a :href="route('tool.designbundles')"><div class="rounded-full h-40 w-40 bg-green-500 flex items-center justify-center text-white bundlessvg"></div></a>
+                        <a :href="route('tool.fabrica')"><div class="rounded-full h-40 w-40 bg-purple-500 flex items-center justify-center text-white fabricasvg"></div></a>
                         <a href="http://www.discountcalculator.net/" target="_blank"><div class="rounded-full h-40 w-40 bg-purple-400 flex items-center justify-center calcsvg"></div></a>
                         <a :href="route('guide')"><div class="rounded-full h-40 w-40 bg-green-500 flex items-center justify-center previewsvg"></div></a>
                         <a :href="route('plan')"><div class="rounded-full h-40 w-40 bg-yellow-400 flex items-center justify-center descsvg"></div></a>
@@ -54,6 +54,23 @@
 }
 .descsvg {
     background-image: url('/img/Description.svg');
+    background-repeat: round;
+}
+
+.fabricasvg {
+    background-image: url('/img/Fabrica.svg');
+    background-repeat: round;
+}
+.monstersvg {
+    background-image: url('/img/Monster.svg');
+    background-repeat: round;
+}
+.bundlessvg {
+    background-image: url('/img/Bundles.svg');
+    background-repeat: round;
+}
+.crellasvg {
+    background-image: url('/img/Crella.svg');
     background-repeat: round;
 }
 </style>
